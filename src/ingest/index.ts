@@ -2,13 +2,14 @@ import type { Item } from '@/lib/types';
 import { fetchCouncil } from './council';
 import { fetchFdaRss } from './fdaRss';
 import { fetchOpenFda } from './openfda';
-import { fetchPageWatch } from './pageWatch';
+import { WATCHED, watchPage } from './pageWatch';
 
 export const FETCHERS: { name: string; fetch: () => Promise<Item[]> }[] = [
   { name: 'openFDA enforcement', fetch: fetchOpenFda },
   { name: 'FDA recall RSS', fetch: fetchFdaRss },
   { name: 'Atlanta City Council', fetch: fetchCouncil },
-  { name: 'City and county page watch', fetch: fetchPageWatch },
+  // One entry per page, so a blocked page is reported without losing the others.
+  ...WATCHED.map((page) => ({ name: page.name, fetch: () => watchPage(page) })),
 ];
 
 /** A failed source is reported, never replaced with demo data: silence must not read as all clear. */

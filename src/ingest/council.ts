@@ -6,7 +6,8 @@ import { USER_AGENT, fetchText, fixturePath, readFixture, resolveDates, sourceMo
 import { pdfText } from './pdf';
 
 const BASE = 'https://citycouncil.atlantaga.gov/';
-const RELEVANT = /agenda|ordinance|resolution|legislation|staff report/i;
+const AGENDA_PAGE = `${BASE}legislation/meeting-agenda`;
+const LEGISLATION_NUMBER = /\b\d{2}-[OR]-\d+/i;
 
 export interface AgendaEntry {
   title: string;
@@ -25,7 +26,8 @@ export function parseAgendaHtml(html: string): AgendaEntry[] {
     const href = a.attr('href')!;
     const title = a.text().replace(/\s+/g, ' ').trim();
     if (!title || seen.has(href + title)) return;
-    if (!RELEVANT.test(title) && !/\.pdf($|\?)/i.test(href)) return;
+    // Site navigation also says Legislation and Agenda, so only real documents count.
+    if (!LEGISLATION_NUMBER.test(title) && !/\.pdf($|\?)/i.test(href)) return;
     seen.add(href + title);
     const row = a.closest('li, tr, article');
     entries.push({
@@ -48,7 +50,7 @@ async function pdfBody(href: string): Promise<string> {
 }
 
 export async function fetchCouncil(): Promise<Item[]> {
-  const html = sourceMode() === 'fixture' ? readFixture('council/agenda.html') : await fetchText(BASE);
+  const html = sourceMode() === 'fixture' ? readFixture('council/agenda.html') : await fetchText(AGENDA_PAGE);
   const items: Item[] = [];
   for (const e of parseAgendaHtml(html)) {
     const isPdf = /\.pdf($|\?)/i.test(e.href);
@@ -56,7 +58,7 @@ export async function fetchCouncil(): Promise<Item[]> {
     let body = '';
     if (isPdf) body = await pdfBody(e.href).catch(() => '');
     items.push({
-      id: `council:${createHash('sha1').update(e.title).digest('hex').slice(0, 12)}`,
+      id: `council:${createHash('sha1').update(e.title + (e.href === '#' ? '' : e.href)).digest('hex').slice(0, 12)}`,
       source: 'atlanta-council',
       title: e.title,
       url: fixture ? BASE : new URL(e.href, BASE).toString(),

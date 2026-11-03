@@ -4,11 +4,18 @@ import { getDb } from '@/lib/db';
 import type { Item, Source } from '@/lib/types';
 import { fetchText, readFixture, sourceMode } from './fixtures';
 
-const WATCHED: { url: string; source: Source; name: string }[] = [
-  { url: 'https://www.atlantaga.gov/government/departments/city-planning/office-of-buildings/special-administrative-permits', source: 'atlanta-notices', name: 'Atlanta vending and special permits' },
+export interface WatchedPage {
+  url: string;
+  source: Source;
+  name: string;
+}
+
+export const WATCHED: WatchedPage[] = [
+  { url: 'https://www.atlantaga.gov/government/departments/city-planning', source: 'atlanta-notices', name: 'Atlanta vending and special permits' },
   { url: 'https://www.atlantaga.gov/government/departments/department-of-transportation', source: 'atlanta-notices', name: 'Atlanta DOT street work notices' },
-  { url: 'https://fultoncountyboh.com/services/environmental-health/food-service/', source: 'county-health', name: 'Fulton County Board of Health food service' },
-  { url: 'https://dekalbpublichealth.com/environmental-health/', source: 'county-health', name: 'DeKalb County Board of Health food service' },
+  { url: 'https://fultoncountyboh.com/environmental-health/', source: 'county-health', name: 'Fulton County Board of Health' },
+  { url: 'https://fultoncountyboh.com/environmental-health/food-service/restaurant-inspection-resources/', source: 'county-health', name: 'Fulton County food service' },
+  { url: 'https://dekalbpublichealth.com/', source: 'county-health', name: 'DeKalb County Board of Health' },
 ];
 
 export function pageText(html: string): string {
@@ -26,21 +33,17 @@ export function detectChange(url: string, text: string): boolean {
   return !!prev && prev.hash !== hash;
 }
 
-export async function fetchPageWatch(): Promise<Item[]> {
-  if (sourceMode() === 'fixture') return JSON.parse(readFixture('pages/notices.json')) as Item[];
+export async function watchPage(page: WatchedPage): Promise<Item[]> {
+  if (sourceMode() === 'fixture') return page === WATCHED[0] ? (JSON.parse(readFixture('pages/notices.json')) as Item[]) : [];
   const today = new Date().toISOString().slice(0, 10);
-  const items: Item[] = [];
-  for (const page of WATCHED) {
-    const text = pageText(await fetchText(page.url));
-    if (!detectChange(page.url, text)) continue;
-    items.push({
-      id: `page:${createHash('sha1').update(page.url + today).digest('hex').slice(0, 12)}`,
-      source: page.source,
-      title: `${page.name} page changed`,
-      url: page.url,
-      publishedAt: today,
-      rawText: text.slice(0, 20_000),
-    });
-  }
-  return items;
+  const text = pageText(await fetchText(page.url));
+  if (!detectChange(page.url, text)) return [];
+  return [{
+    id: `page:${createHash('sha1').update(page.url + today).digest('hex').slice(0, 12)}`,
+    source: page.source,
+    title: `${page.name} page changed`,
+    url: page.url,
+    publishedAt: today,
+    rawText: text.slice(0, 20_000),
+  }];
 }
