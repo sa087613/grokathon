@@ -32,7 +32,7 @@ export function ItemActions({ itemId, itemTitle, buttons }: { itemId: string; it
         if (b.href) return <Button key={b.id} variant="ghost" asChild><a href={b.href}>{body}</a></Button>;
         return <Button key={b.id} variant="ghost" disabled={busy} onClick={() => run(b.id)}>{body}</Button>;
       })}
-      {error && <span role="alert" className="text-sm text-brick-deep">{error}</span>}
+      {error && <span role="alert" className="text-sm text-brick">{error}</span>}
     </div>
   );
 }

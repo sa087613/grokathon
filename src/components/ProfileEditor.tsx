@@ -23,7 +23,7 @@ function FactRow({ fact, onSave, onRemove }: { fact: Fact; onSave: (v: string) =
     );
   }
   return (
-    <div className="group grid gap-1 border-b border-line py-3 hover:bg-panel sm:grid-cols-2 sm:gap-6 sm:px-3 sm:-mx-3">
+    <div className="group grid gap-1 border-b border-line py-3 hover:bg-raise sm:grid-cols-2 sm:gap-6 sm:px-3 sm:-mx-3">
       <p className="font-medium">{fact.fact}</p>
       <p className="flex items-start justify-between gap-4 text-ink/75">
         {fact.changes}
@@ -37,10 +37,10 @@ function AddRow({ label, placeholders, onAdd }: { label: string; placeholders: s
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState(placeholders.map(() => ''));
   if (!open) {
-    return <button onClick={() => setOpen(true)} className="flex w-full items-center gap-2 border-t-3 border-ink py-3 text-sm font-semibold"><Plus className="h-4 w-4" />{label}</button>;
+    return <button onClick={() => setOpen(true)} className="flex w-full items-center gap-2 border-t-2 border-ink py-3 text-sm font-semibold"><Plus className="h-4 w-4" />{label}</button>;
   }
   return (
-    <form className="flex flex-wrap gap-2 border-t-3 border-ink py-3" onSubmit={(e) => {
+    <form className="flex flex-wrap gap-2 border-t-2 border-ink py-3" onSubmit={(e) => {
       e.preventDefault();
       if (!values[0].trim()) return;
       onAdd(values);
@@ -75,25 +75,25 @@ export function ProfileEditor({ initial }: { initial: StoreProfile }) {
           </button>
         ))}
       </div>
-      {error && <p role="alert" className="mb-4 text-sm text-brick-deep">{error}</p>}
+      {error && <p role="alert" className="mb-4 text-sm text-brick">{error}</p>}
       {tab === 'basics' ? (
         <section>
           <h2 className="section-head">The basics</h2>
           <p className="mt-2 pb-4 text-sm text-ink/75">Who you are and where you work decide which rules get a close read.</p>
           <div className="label hidden grid-cols-2 gap-6 border-b border-line pb-2 text-muted sm:grid"><span>The fact</span><span>What it changes</span></div>
           {facts.map((f) => <FactRow key={`${f.id}-${f.value}`} fact={f} onSave={(v) => save(applyFact(profile, f.id, v))} onRemove={() => save(removeFact(profile, f.id))} />)}
-          <AddRow label="Tell the radar something else" placeholders={['A fact about your business']} onAdd={([n]) => save({ ...profile, notes: [...profile.notes, n.trim()] })} />
+          <AddRow label="Tell me something else" placeholders={['A fact about your business']} onAdd={([n]) => save({ ...profile, notes: [...profile.notes, n.trim()] })} />
         </section>
       ) : (
         <section>
           <h2 className="section-head">Carry list</h2>
           <p className="mt-2 pb-4 text-sm text-ink/75">Recalls name a brand, so this is how the radar knows one is yours.</p>
-          <div className="label hidden grid-cols-2 gap-6 border-b border-line pb-2 text-muted sm:grid"><span>Item</span><span>Brands to match</span></div>
+          <div className="label hidden grid-cols-2 gap-6 border-b border-line pb-2 text-muted sm:grid"><span>Item</span><span>Brands I match against</span></div>
           {profile.carry.map((c, i) => (
             <div key={c.item} className="group grid gap-2 border-b border-line py-3 sm:grid-cols-2 sm:gap-6">
               <p className="font-medium">{c.item}</p>
               <div className="flex items-start justify-between gap-4">
-                <p className="flex flex-wrap gap-3">{c.brands.map((b) => <span key={b} className="bg-panel px-2 py-0.5 text-sm">{b}</span>)}</p>
+                <p className="flex flex-wrap gap-3">{c.brands.map((b) => <span key={b} className="border border-line-strong px-2 py-0.5 text-sm">{b}</span>)}</p>
                 <button onClick={() => save({ ...profile, carry: profile.carry.filter((_, j) => j !== i) })} className="text-link-plain text-sm sm:opacity-0 sm:focus:opacity-100 sm:group-hover:opacity-100">Remove</button>
               </div>
             </div>

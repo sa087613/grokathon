@@ -16,9 +16,9 @@ export function Header({ checked, initials, businessName }: { checked: string; i
   const path = usePathname();
   const active = (href: string) => (href === '/' ? path === '/' || path === '/rejected' || path === '/ask' : path === href);
   return (
-    <header className="sticky top-0 z-[900] grid grid-cols-[1fr_auto] items-center border-b-3 border-ink bg-paper px-4 sm:px-8 lg:grid-cols-[1fr_auto_1fr]">
+    <header className="sticky top-0 z-[900] grid grid-cols-[1fr_auto] items-center border-b-2 border-ink bg-paper px-4 sm:px-8 lg:grid-cols-[1fr_auto_1fr]">
       <Link href="/" aria-label="Peachtree overview" className="flex h-14 items-center gap-2 lg:h-20">
-        <Logomark className="h-8 w-8" />
+        <Logomark className="h-8 w-8 text-peach" />
         <span className="font-bold tracking-tight">Peachtree</span>
       </Link>
       <div className="flex items-center justify-end gap-3 lg:order-3">
@@ -29,7 +29,7 @@ export function Header({ checked, initials, businessName }: { checked: string; i
       <nav className="col-span-2 -mb-[3px] flex justify-between gap-2 sm:justify-center sm:gap-8 lg:col-span-1 lg:order-2">
         {NAV.map(({ href, label, icon: Icon }) => (
           <Link key={href} href={href} aria-current={active(href) ? 'page' : undefined}
-            className={cn('flex items-center gap-2 border-b-[6px] py-3 text-sm lg:py-6', active(href) ? 'border-ink font-semibold' : 'border-transparent text-ink/70 hover:text-ink')}>
+            className={cn('flex items-center gap-2 border-b-[6px] py-3 text-sm lg:py-6', active(href) ? 'border-peach font-semibold' : 'border-transparent text-ink/70 hover:text-ink')}>
             <Icon className="h-4 w-4" />{label}
           </Link>
         ))}

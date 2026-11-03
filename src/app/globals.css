@@ -2,19 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Dark only. Space-separated RGB channels so Tailwind opacity modifiers work. */
+:root {
+  color-scheme: dark;
+  --paper: 18 17 16;
+  --panel: 26 25 23;
+  --raise: 35 33 30;
+  --ink: 236 232 225;
+  --muted: 155 149 138;
+  --line: 52 49 44;
+  --line-strong: 92 87 79;
+  --peach: 255 180 138;
+  --coral: 229 100 90;
+  --coral-soft: 42 22 20;
+  --link: 122 167 255;
+  --link-soft: 30 39 58;
+  --amber: 224 168 74;
+}
+
 body { @apply bg-paper font-sans text-ink antialiased; }
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { @apply outline outline-2 outline-offset-1 outline-link; }
 
 @layer components {
   .label { @apply font-mono text-xs uppercase tracking-[0.14em]; }
   .hero { @apply text-[2.75rem] font-bold leading-[1.02] tracking-[-0.035em] sm:text-7xl; }
-  .section-head { @apply label border-b-3 border-ink pb-2; }
+  .section-head { @apply label border-b-2 border-ink pb-2; }
   .dotted { @apply border-b border-dotted border-line-strong; }
   .field { @apply w-full border border-line-strong bg-paper px-3 py-2 text-sm focus:border-link focus:outline-none; }
   .text-link-plain { @apply text-link hover:underline; }
 }
 
-.leaflet-container { font-family: inherit; background: #e5e2d7; }
-.leaflet-bar, .leaflet-bar a { border-radius: 0 !important; box-shadow: none; }
-.job-cluster { display: flex; align-items: center; justify-content: center; background: #171614; color: #eeece4; font: 11px var(--font-mono); }
-.leaflet-tile-pane { filter: grayscale(1) contrast(0.8) brightness(1.08); }
+
+.leaflet-container { font-family: inherit; background: rgb(var(--panel)); }
+.leaflet-bar, .leaflet-bar a { border-radius: 0 !important; box-shadow: none !important; }
+.leaflet-bar a, .leaflet-bar a:hover { background: rgb(var(--panel)); color: rgb(var(--ink)); border-color: rgb(var(--line)); }
+.leaflet-container .leaflet-control-attribution { background: rgb(var(--paper)); color: rgb(var(--muted)); }
+.leaflet-container .leaflet-control-attribution a { color: rgb(var(--link)); }
+.job-cluster { display: flex; align-items: center; justify-content: center; background: rgb(var(--ink)); color: rgb(var(--paper)); font: 11px var(--font-mono); }
+.osm-dark .leaflet-tile-pane { filter: grayscale(1) invert(1) brightness(0.75) contrast(1.15); }

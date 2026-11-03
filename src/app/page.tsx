@@ -50,10 +50,10 @@ export default function Overview({ searchParams }: { searchParams: { tab?: strin
           links={RANGES.map((r) => ({ href: href({ range: r.id === 'all' ? undefined : r.id }), label: r.label }))}
         />
         <h1 className="hero mx-auto mt-5 max-w-3xl text-balance">
-          {actions ? `${actions} ${actions === 1 ? 'item needs' : 'items need'} you today.` : 'Nothing needs you today.'}
+          {actions ? `${actions} ${actions === 1 ? 'item needs' : 'items need'} your signature.` : 'Nothing needs your signature.'}
         </h1>
         <p className="mt-5 text-ink/75">{views.length} read · {views.filter((v) => v.decision.effective !== 'REJECT').length} brought to you</p>
-        {failures.length > 0 && <p role="alert" className="mt-4 text-sm text-brick-deep">Not fully checked: {failures.join('; ')}.</p>}
+        {failures.length > 0 && <p role="alert" className="mt-4 text-sm text-brick">Not fully checked: {failures.join('; ')}.</p>}
       </section>
 
       <div className="grid gap-10 pt-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-14">
@@ -62,11 +62,11 @@ export default function Overview({ searchParams }: { searchParams: { tab?: strin
             <nav className="grid flex-1 grid-cols-2 border border-ink text-sm sm:inline-grid sm:flex-none sm:grid-flow-col sm:auto-cols-auto">
               {TABS.map((t) => (
                 <Link key={t.id} href={href({ tab: t.id, topic: undefined })} aria-current={t.id === tabId ? 'page' : undefined}
-                  className={cn('border-ink px-4 py-3 text-center sm:border-r', t.id === tabId ? 'bg-ink font-semibold text-paper' : 'hover:bg-panel')}>
+                  className={cn('border-ink px-4 py-3 text-center sm:border-r', t.id === tabId ? 'bg-ink font-semibold text-paper' : 'hover:bg-raise')}>
                   {t.label} <span className="ml-1 font-mono text-xs opacity-70">{count(t.kind)}</span>
                 </Link>
               ))}
-              <TextMenu className="flex items-center justify-center gap-2 px-4 py-3 hover:bg-panel" label="The record" links={[
+              <TextMenu className="flex items-center justify-center gap-2 px-4 py-3 hover:bg-raise" label="The record" links={[
                 { href: '/rejected', label: 'Rejected log', count: views.filter((v) => v.decision.effective === 'REJECT').length },
                 { href: href({ tab: 'resolved', topic: undefined }), label: 'Resolved', count: views.filter((v) => v.resolvedAt).length },
               ]} />

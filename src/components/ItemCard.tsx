@@ -30,7 +30,7 @@ export function ItemCard({ view, buttons, products, upc }: { view: ItemView; but
   const urgent = d.effective === 'NEEDS_ACTION';
   const toggle = products.length ? (open ? 'Hide the products' : 'Show the products') : open ? 'Hide details' : 'Show details';
   return (
-    <article className="border-b-3 border-ink bg-panel">
+    <article className="border-b-2 border-ink bg-panel">
       <div className="space-y-4 p-4 sm:p-5">
         <div className="flex flex-wrap gap-2">
           <Badge variant={TAG[d.effective].variant}>{TAG[d.effective].text}</Badge>
@@ -39,7 +39,7 @@ export function ItemCard({ view, buttons, products, upc }: { view: ItemView; but
             {view.classLabel}{CLASS_HELP[view.classLabel] && <Info className="h-3 w-3" />}
           </Badge>
         </div>
-        <p className={cn('flex items-start gap-3 border px-4 py-3 text-sm', urgent ? 'border-brick/20 bg-brick-soft text-brick-deep' : 'border-line bg-paper')}>
+        <p className={cn('flex items-start gap-3 border px-4 py-3 text-sm', urgent ? 'border-brick bg-brick-soft text-brick' : 'border-line bg-paper')}>
           {urgent && <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0" />}{d.reason}
         </p>
         <div className="flex items-start justify-between gap-6">
@@ -47,7 +47,7 @@ export function ItemCard({ view, buttons, products, upc }: { view: ItemView; but
             <h3 className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl">{view.title}</h3>
             <p className="mt-2 text-sm text-muted">
               Published {formatDate(view.publishedAt)} · Flagged {formatDate(d.createdAt)}
-              {d.deadline && <span className="text-brick-deep"> · Due {formatDate(d.deadline)}</span>}
+              {d.deadline && <span className="text-brick"> · Due {formatDate(d.deadline)}</span>}
             </p>
           </div>
           {upc && <Barcode upc={upc} />}

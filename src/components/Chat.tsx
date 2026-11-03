@@ -40,11 +40,11 @@ export function Chat({ item }: { item: { id: string; title: string } | null }) {
           <p key={i} className={`whitespace-pre-line text-sm ${m.role === 'user' ? 'font-semibold' : 'text-ink/80'}`}>{m.content}</p>
         ))}
         {busy && <p className="label text-muted">Looking</p>}
-        {error && <p role="alert" className="text-sm text-brick-deep">{error}</p>}
+        {error && <p role="alert" className="text-sm text-brick">{error}</p>}
       </div>
       {!messages.length && !item && (
         <div className="flex flex-wrap gap-2">
-          {SUGGESTIONS.map((s) => <button key={s} onClick={() => send(s)} className="border border-line-strong px-2.5 py-1 text-xs hover:bg-panel">{s}</button>)}
+          {SUGGESTIONS.map((s) => <button key={s} onClick={() => send(s)} className="border border-line-strong px-2.5 py-1 text-xs hover:bg-raise">{s}</button>)}
         </div>
       )}
       <form className="mt-4 flex gap-2" onSubmit={(e) => { e.preventDefault(); send(input); }}>

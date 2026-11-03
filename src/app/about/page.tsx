@@ -14,13 +14,13 @@ const BUILT = [
 /** Our own mark: a radar sweep with one peach-shaped return among quiet dots. */
 function RadarArt() {
   return (
-    <svg viewBox="0 0 420 240" className="mx-auto h-auto w-full max-w-md" fill="none" stroke="#171614" strokeWidth="2" aria-hidden="true">
+    <svg viewBox="0 0 420 240" className="mx-auto h-auto w-full max-w-md" fill="none" stroke="#ECE8E1" strokeWidth="2" aria-hidden="true">
       {[210, 160, 110, 60].map((r) => <path key={r} d={`M${210 - r} 225a${r} ${r} 0 0 1 ${2 * r} 0`} />)}
       <path d="M0 225h420" strokeWidth="4" />
-      <path d="M210 225 300 62" />
-      {[[90, 170], [140, 120], [165, 190], [255, 180], [340, 195], [120, 205], [235, 100]].map(([x, y]) => <rect key={x} x={x} y={y} width="6" height="6" fill="#A9A69B" stroke="none" />)}
-      <circle cx="306" cy="98" r="20" fill="#BE4A47" />
-      <path d="M306 78c-5 8-5 32 0 40M306 78c2-9 10-11 18-9-2 9-10 12-18 9z" fill="#EEECE4" />
+      <path d="M210 225 300 62" stroke="#E5645A" />
+      {[[90, 170], [140, 120], [165, 190], [255, 180], [340, 195], [120, 205], [235, 100]].map(([x, y]) => <rect key={x} x={x} y={y} width="6" height="6" fill="#9B958A" stroke="none" />)}
+      <circle cx="306" cy="98" r="20" fill="#FFB48A" stroke="#121110" />
+      <path d="M306 78c-5 8-5 32 0 40M306 78c2-9 10-11 18-9-2 9-10 12-18 9z" fill="#E5645A" stroke="#121110" />
     </svg>
   );
 }

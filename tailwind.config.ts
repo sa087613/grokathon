@@ -1,6 +1,8 @@
 import type { Config } from 'tailwindcss';
 
-// Keep in step with docs/DESIGN.md.
+// Values live as CSS variables in src/app/globals.css. Keep in step with docs/DESIGN.md.
+const v = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
+
 export default {
   content: ['./src/**/*.{ts,tsx}'],
   theme: {
@@ -8,21 +10,22 @@ export default {
     boxShadow: { none: 'none' },
     extend: {
       colors: {
-        paper: '#EEECE4',
-        panel: '#E5E2D7',
-        ink: '#171614',
-        muted: '#67645C',
-        line: '#CBC8BD',
-        'line-strong': '#A9A69B',
-        brick: { DEFAULT: '#BE4A47', deep: '#8E1F1F', soft: '#FBEFEC' },
-        link: { DEFAULT: '#1F5FA8', soft: '#D5E2F2' },
-        job: { street: '#B3261E', repaving: '#C98A2E', nodig: '#8FB0D6', building: '#8F8C84' },
+        paper: v('paper'),
+        panel: v('panel'),
+        raise: v('raise'),
+        ink: v('ink'),
+        muted: v('muted'),
+        line: v('line'),
+        'line-strong': v('line-strong'),
+        peach: v('peach'),
+        brick: { DEFAULT: v('coral'), soft: v('coral-soft') },
+        link: { DEFAULT: v('link'), soft: v('link-soft') },
+        job: { street: v('coral'), repaving: v('amber'), nodig: v('link'), building: v('muted') },
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
-      borderWidth: { 3: '3px' },
     },
   },
 } satisfies Config;

@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 const badgeVariants = cva('label inline-flex items-center gap-1.5 border px-2.5 py-1', {
   variants: {
     variant: {
-      urgent: 'border-brick bg-brick text-white',
+      urgent: 'border-brick bg-brick text-paper',
       solid: 'border-ink bg-ink text-paper',
       outline: 'border-line-strong text-ink/80',
     },
