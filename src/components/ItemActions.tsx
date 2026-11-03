@@ -1,10 +1,15 @@
 'use client';
 
+import { Bell, BellOff, Check, Mail, MessageSquare, Undo2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import type { ActionButton } from '@/actions/registry';
+import { Button } from './ui/button';
+import { openChat } from './ChatDock';
 
-export function ItemActions({ itemId, buttons }: { itemId: string; buttons: ActionButton[] }) {
+const ICONS: Record<string, typeof Check> = { resolve: Check, share: Mail, dismiss: BellOff, surface: Bell, ask: MessageSquare };
+
+export function ItemActions({ itemId, itemTitle, buttons }: { itemId: string; itemTitle: string; buttons: ActionButton[] }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -18,14 +23,16 @@ export function ItemActions({ itemId, buttons }: { itemId: string; buttons: Acti
     else setError('That did not save. Try again.');
   }
 
-  const style = 'text-muted hover:text-peach-deep disabled:opacity-50';
   return (
-    <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-      {buttons.map((b) =>
-        b.href ? <a key={b.id} href={b.href} className={style}>{b.label}</a>
-          : <button key={b.id} disabled={busy} onClick={() => run(b.id)} className={style}>{b.label}</button>,
-      )}
-      {error && <span role="alert" className="text-peach-deep">{error}</span>}
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+      {buttons.map((b) => {
+        const Icon = ICONS[b.id] ?? Undo2;
+        const body = <><Icon className="h-4 w-4" />{b.label}</>;
+        if (b.id === 'ask') return <Button key={b.id} variant="ghost" onClick={() => openChat({ id: itemId, title: itemTitle })}>{body}</Button>;
+        if (b.href) return <Button key={b.id} variant="ghost" asChild><a href={b.href}>{body}</a></Button>;
+        return <Button key={b.id} variant="ghost" disabled={busy} onClick={() => run(b.id)}>{body}</Button>;
+      })}
+      {error && <span role="alert" className="text-sm text-brick-deep">{error}</span>}
     </div>
   );
 }

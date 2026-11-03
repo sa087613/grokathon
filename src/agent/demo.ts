@@ -20,7 +20,15 @@ export function demoProfile(): StoreProfile {
       { name: 'Vending permit', issuer: 'City of Atlanta', expires: addDays(32) },
       { name: 'Vendor permit', issuer: 'Atlanta Police Department', expires: addDays(200) },
     ],
-    suppliers: ['Sunbelt Produce Co', 'Red Clay Tortilla', 'Blue Ridge Poultry', 'Old South Spice', 'Chattahoochee Creamery'],
+    carry: [
+      { item: 'Onions, peppers and fresh produce', brands: ['Sunbelt Produce Co'] },
+      { item: 'Corn and flour tortillas', brands: ['Red Clay Tortilla'] },
+      { item: 'Chicken thighs', brands: ['Blue Ridge Poultry'] },
+      { item: 'Spices and seasoning', brands: ['Old South Spice'] },
+      { item: 'Crema and cotija', brands: ['Chattahoochee Creamery'] },
+      { item: 'Salsas', brands: ['house-made'] },
+    ],
+    notes: ['Parks at Krog Street on weekdays and needs curb access by 10 AM'],
     headcount: 6,
     baseLocation: 'Krog Street and Edgewood Ave NE, Atlanta',
   };

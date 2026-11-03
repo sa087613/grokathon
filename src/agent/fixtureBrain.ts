@@ -1,4 +1,4 @@
-import type { Item, StoreProfile, TriageResult } from '@/lib/types';
+import { carriedBrands, type Item, type StoreProfile, type TriageResult } from '@/lib/types';
 import { classify } from '@/lib/classify';
 import type { Example } from './retrieve';
 
@@ -47,7 +47,7 @@ export function triageFixture(item: Item, profile: StoreProfile, examples: Examp
 
   switch (classify(item).topic) {
     case 'food_recalls': {
-      const hit = profile.suppliers.find((s) => text.toLowerCase().includes(s.toLowerCase()));
+      const hit = carriedBrands(profile).find((s) => text.toLowerCase().includes(s.toLowerCase()));
       if (hit) {
         return result('NEEDS_ACTION', `Names ${hit}, which you carry.`, {
           deadline: new Date().toISOString().slice(0, 10),

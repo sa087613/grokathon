@@ -23,7 +23,7 @@ const surfaced = (v: ItemView) => v.decision.effective !== 'REJECT';
 
 /** Add one entry here to add a button to every item card. */
 export const ACTIONS: ItemAction[] = [
-  { id: 'resolve', label: 'Resolve', appliesTo: surfaced, run: (v) => resolveItem(v.id) },
+  { id: 'resolve', label: 'Resolve', appliesTo: (v) => surfaced(v) && !v.resolvedAt, run: (v) => resolveItem(v.id) },
   { id: 'share', label: 'Share via email', appliesTo: surfaced, href: mailtoHref },
   { id: 'dismiss', label: "Didn't need this", appliesTo: surfaced, run: (v) => overturn(v.id, 'didnt_need') },
   { id: 'surface', label: 'Should have surfaced', appliesTo: (v) => !surfaced(v), run: (v) => overturn(v.id, 'should_have_surfaced') },

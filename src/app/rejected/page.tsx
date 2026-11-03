@@ -1,26 +1,29 @@
-import { ensureDemoFresh } from '@/agent/demo';
-import { ItemActions } from '@/components/ItemActions';
 import { buttonsFor } from '@/actions/registry';
-import { SOURCE_LABELS, formatDate } from '@/lib/format';
+import { ItemActions } from '@/components/ItemActions';
+import { SOURCE_TAGS, formatDate } from '@/lib/format';
 import { listRejected } from '@/lib/store';
 
 export const dynamic = 'force-dynamic';
 
-export default async function Rejected() {
-  await ensureDemoFresh();
+export default function Rejected() {
   const rows = listRejected();
   return (
     <>
-      <h1 className="font-serif text-3xl">Rejected</h1>
-      <p className="mt-2 pb-6 text-sm text-muted">{rows.length} items kept out of your way. Overturn any of them and future triage learns from it.</p>
-      {rows.map((v) => (
-        <article key={v.id} className="border-t border-line py-4">
-          <p className="text-xs text-muted">{SOURCE_LABELS[v.source]} · {formatDate(v.publishedAt)}{v.decision.overrideKind === 'didnt_need' ? ' · Dismissed by you' : ''}</p>
-          <h3 className="mt-1 text-sm">{v.title}</h3>
-          <p className="mt-1 text-sm text-muted">{v.decision.reason}</p>
-          <ItemActions itemId={v.id} buttons={buttonsFor(v)} />
-        </article>
-      ))}
+      <section className="dotted py-12 text-center sm:py-20">
+        <h1 className="hero">What I left out</h1>
+        <p className="mx-auto mt-5 max-w-xl text-ink/75">{rows.length} items kept out of your way, each with its reason. Overturn one and later runs treat it as precedent.</p>
+      </section>
+      <div className="mx-auto max-w-3xl pt-10">
+        <h2 className="section-head">Rejected log</h2>
+        {rows.map((v) => (
+          <article key={v.id} className="border-b border-line py-4">
+            <p className="label text-muted">{SOURCE_TAGS[v.source]} · {formatDate(v.publishedAt)}{v.decision.overrideKind === 'didnt_need' ? ' · Dismissed by you' : ''}</p>
+            <h3 className="mt-2 font-semibold">{v.title}</h3>
+            <p className="mt-1 text-sm text-muted">{v.decision.reason}</p>
+            <div className="-ml-2 mt-2"><ItemActions itemId={v.id} itemTitle={v.title} buttons={buttonsFor(v)} /></div>
+          </article>
+        ))}
+      </div>
     </>
   );
 }

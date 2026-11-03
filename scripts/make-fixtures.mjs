@@ -3,8 +3,8 @@ import fs from 'node:fs';
 
 const f = (firm, product, reason, dist, cls, days, n) => ({ recall_number: `F-${1000 + n}-2026`, recalling_firm: firm, product_description: product, reason_for_recall: reason, distribution_pattern: dist, classification: cls, report_date: `{{ymd-${days}}}`, code_info: `Lots ${n}A through ${n}F` });
 const recalls = [
-  ['Sunbelt Produce Co', 'Diced yellow onions, 5 lb foodservice bags', 'Potential Salmonella contamination', 'GA, AL, SC, TN foodservice distributors', 'Class I', 0],
-  ['Red Clay Tortilla', 'Corn tortillas, 6 inch, 80 count', 'Undeclared wheat', 'Georgia restaurants and wholesale', 'Class II', 1],
+  ['Sunbelt Produce Co', 'Diced yellow onions, 5 lb foodservice bag; Sliced red onions, 5 lb foodservice bag; Pico base mix, 2 lb tub', 'Potential Salmonella contamination', 'GA, AL, SC, TN foodservice distributors', 'Class I', 0],
+  ['Red Clay Tortilla', 'Corn tortillas, 6 inch, 80 count; Street taco tortillas, 4 inch, 100 count', 'Undeclared wheat', 'Georgia restaurants and wholesale', 'Class II', 1],
   ['Prairie Lake Dairy', 'Shredded Monterey Jack, 5 lb foodservice bags', 'Potential Listeria monocytogenes', 'Nationwide wholesale and foodservice', 'Class I', 2],
   ['Harbor North Seafood', 'Frozen cod fillets', 'Temperature abuse in transit', 'WA, OR, ID retail stores', 'Class II', 1],
   ['Maple Hollow Bakery', 'Blueberry muffins, 4 pack', 'Undeclared milk', 'VT, NH, ME retail', 'Class II', 2],
@@ -18,6 +18,9 @@ const recalls = [
   ['Bayou Spice House', 'Cajun seasoning, 6 oz', 'Elevated lead', 'LA, MS retail', 'Class II', 6],
   ['Cold Spring Creamery', 'Vanilla ice cream, pints', 'Foreign material, metal', 'NY, NJ retail', 'Class II', 7],
 ].map((r, i) => f(...r, i + 1));
+const upc = (b) => { const d = [...b].map(Number); const sum = d.reduce((a, x, i) => a + x * (i % 2 ? 1 : 3), 0); return b + (10 - (sum % 10)) % 10; };
+recalls[0].code_info = `Best by {{long+18}}. UPC ${upc('84120300417')}`;
+recalls[1].code_info = `Best by {{long+9}}. UPC ${upc('85006200138')}`;
 fs.writeFileSync('fixtures/openfda.json', JSON.stringify({ results: recalls }, null, 2));
 
 const rss = [
@@ -79,6 +82,19 @@ const notices = [
   n('n20', H, 'DeKalb County Board of Health: tattoo studio rule update', 6, 'Body art studio rule change.'),
 ];
 fs.writeFileSync('fixtures/pages/notices.json', JSON.stringify(notices, null, 2));
+
+// Deterministic street jobs around the demo truck's base and commissary.
+let seed = 7;
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const STREETS = ['Edgewood Ave NE', 'Krog St NE', 'DeKalb Ave NE', 'Decatur St SE', 'Boulevard NE', 'Irwin St NE', 'Howell Mill Rd NW', 'Chattahoochee Ave NW', 'Marietta St NW', 'Huff Rd NW'];
+const WORK = { street: 'Utility trench and lane closure', repaving: 'Mill and overlay', nodig: 'No excavation allowed after recent paving', building: 'Building permit with sidewalk staging' };
+const KINDS = [...Array(14).fill('street'), ...Array(4).fill('repaving'), ...Array(8).fill('nodig'), ...Array(22).fill('building')];
+const jobs = KINDS.map((kind, i) => {
+  const west = i % 3 === 0;
+  const street = STREETS[(west ? 6 : 0) + Math.floor(rnd() * (west ? 4 : 6))];
+  return { id: i + 1, kind, street, detail: WORK[kind], lat: +((west ? 33.8035 : 33.7545) + (rnd() - 0.5) * 0.012).toFixed(5), lng: +((west ? -84.4125 : -84.3645) + (rnd() - 0.5) * 0.014).toFixed(5), validThrough: `{{iso+${5 + Math.floor(rnd() * 80)}}}` };
+});
+fs.writeFileSync('fixtures/street-jobs.json', JSON.stringify(jobs, null, 1));
 
 function pdf(lines) {
   const content = `BT /F1 11 Tf 50 740 Td 15 TL\n${lines.map((l) => `(${l.replace(/[()\\]/g, '\\$&')}) Tj T*`).join('\n')}\nET`;

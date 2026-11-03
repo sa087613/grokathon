@@ -3,22 +3,22 @@
     {
       "recall_number": "F-1001-2026",
       "recalling_firm": "Sunbelt Produce Co",
-      "product_description": "Diced yellow onions, 5 lb foodservice bags",
+      "product_description": "Diced yellow onions, 5 lb foodservice bag; Sliced red onions, 5 lb foodservice bag; Pico base mix, 2 lb tub",
       "reason_for_recall": "Potential Salmonella contamination",
       "distribution_pattern": "GA, AL, SC, TN foodservice distributors",
       "classification": "Class I",
       "report_date": "{{ymd-0}}",
-      "code_info": "Lots 1A through 1F"
+      "code_info": "Best by {{long+18}}. UPC 841203004170"
     },
     {
       "recall_number": "F-1002-2026",
       "recalling_firm": "Red Clay Tortilla",
-      "product_description": "Corn tortillas, 6 inch, 80 count",
+      "product_description": "Corn tortillas, 6 inch, 80 count; Street taco tortillas, 4 inch, 100 count",
       "reason_for_recall": "Undeclared wheat",
       "distribution_pattern": "Georgia restaurants and wholesale",
       "classification": "Class II",
       "report_date": "{{ymd-1}}",
-      "code_info": "Lots 2A through 2F"
+      "code_info": "Best by {{long+9}}. UPC 850062001381"
     },
     {
       "recall_number": "F-1003-2026",

@@ -1,0 +1,434 @@
+[
+ {
+  "id": 1,
+  "kind": "street",
+  "street": "Howell Mill Rd NW",
+  "detail": "Utility trench and lane closure",
+  "lat": 33.80855,
+  "lng": -84.41545,
+  "validThrough": "{{iso+21}}"
+ },
+ {
+  "id": 2,
+  "kind": "street",
+  "street": "Boulevard NE",
+  "detail": "Utility trench and lane closure",
+  "lat": 33.75489,
+  "lng": -84.36689,
+  "validThrough": "{{iso+65}}"
+ },
+ {
+  "id": 3,
+  "kind": "street",
+  "street": "Boulevard NE",
+  "detail": "Utility trench and lane closure",
+  "lat": 33.75501,
+  "lng": -84.36192,
+  "validThrough": "{{iso+55}}"
+ },
+ {
+  "id": 4,
+  "kind": "street",
+  "street": "Huff Rd NW",
+  "detail": "Utility trench and lane closure",
+  "lat": 33.8004,
+  "lng": -84.41426,
+  "validThrough": "{{iso+61}}"
+ },
+ {
+  "id": 5,
+  "kind": "street",
+  "street": "Boulevard NE",
+  "detail": "Utility trench and lane closure",
+  "lat": 33.74915,
+  "lng": -84.36193,
+  "validThrough": "{{iso+42}}"
+ },
+ {
+  "id": 6,
+  "kind": "street",
+  "street": "Irwin St NE",
+  "detail": "Utility trench and lane closure",
+  "lat": 33.75819,
+  "lng": -84.36978,
+  "validThrough": "{{iso+46}}"
+ },
+ {
+  "id": 7,
+  "kind": "street",
+  "street": "Huff Rd NW",
+  "detail": "Utility trench and lane closure",
+  "lat": 33.80576,
+  "lng": -84.41049,
+  "validThrough": "{{iso+51}}"
+ },
+ {
+  "id": 8,
+  "kind": "street",
+  "street": "Irwin St NE",
+  "detail": "Utility trench and lane closure",
+  "lat": 33.7594,
+  "lng": -84.36629,
+  "validThrough": "{{iso+31}}"
+ },
+ {
+  "id": 9,
+  "kind": "street",
+  "street": "Irwin St NE",
+  "detail": "Utility trench and lane closure",
+  "lat": 33.75249,
+  "lng": -84.36936,
+  "validThrough": "{{iso+28}}"
+ },
+ {
+  "id": 10,
+  "kind": "street",
+  "street": "Chattahoochee Ave NW",
+  "detail": "Utility trench and lane closure",
+  "lat": 33.80104,
+  "lng": -84.40638,
+  "validThrough": "{{iso+49}}"
+ },
+ {
+  "id": 11,
+  "kind": "street",
+  "street": "Boulevard NE",
+  "detail": "Utility trench and lane closure",
+  "lat": 33.75903,
+  "lng": -84.37068,
+  "validThrough": "{{iso+26}}"
+ },
+ {
+  "id": 12,
+  "kind": "street",
+  "street": "Decatur St SE",
+  "detail": "Utility trench and lane closure",
+  "lat": 33.75461,
+  "lng": -84.3656,
+  "validThrough": "{{iso+20}}"
+ },
+ {
+  "id": 13,
+  "kind": "street",
+  "street": "Huff Rd NW",
+  "detail": "Utility trench and lane closure",
+  "lat": 33.79816,
+  "lng": -84.41438,
+  "validThrough": "{{iso+32}}"
+ },
+ {
+  "id": 14,
+  "kind": "street",
+  "street": "Decatur St SE",
+  "detail": "Utility trench and lane closure",
+  "lat": 33.75959,
+  "lng": -84.36429,
+  "validThrough": "{{iso+18}}"
+ },
+ {
+  "id": 15,
+  "kind": "repaving",
+  "street": "DeKalb Ave NE",
+  "detail": "Mill and overlay",
+  "lat": 33.7519,
+  "lng": -84.3664,
+  "validThrough": "{{iso+38}}"
+ },
+ {
+  "id": 16,
+  "kind": "repaving",
+  "street": "Chattahoochee Ave NW",
+  "detail": "Mill and overlay",
+  "lat": 33.80388,
+  "lng": -84.4109,
+  "validThrough": "{{iso+23}}"
+ },
+ {
+  "id": 17,
+  "kind": "repaving",
+  "street": "Irwin St NE",
+  "detail": "Mill and overlay",
+  "lat": 33.75399,
+  "lng": -84.35942,
+  "validThrough": "{{iso+55}}"
+ },
+ {
+  "id": 18,
+  "kind": "repaving",
+  "street": "Decatur St SE",
+  "detail": "Mill and overlay",
+  "lat": 33.75469,
+  "lng": -84.36443,
+  "validThrough": "{{iso+60}}"
+ },
+ {
+  "id": 19,
+  "kind": "nodig",
+  "street": "Huff Rd NW",
+  "detail": "No excavation allowed after recent paving",
+  "lat": 33.80226,
+  "lng": -84.40958,
+  "validThrough": "{{iso+25}}"
+ },
+ {
+  "id": 20,
+  "kind": "nodig",
+  "street": "Decatur St SE",
+  "detail": "No excavation allowed after recent paving",
+  "lat": 33.75271,
+  "lng": -84.36687,
+  "validThrough": "{{iso+36}}"
+ },
+ {
+  "id": 21,
+  "kind": "nodig",
+  "street": "Boulevard NE",
+  "detail": "No excavation allowed after recent paving",
+  "lat": 33.75903,
+  "lng": -84.36994,
+  "validThrough": "{{iso+70}}"
+ },
+ {
+  "id": 22,
+  "kind": "nodig",
+  "street": "Howell Mill Rd NW",
+  "detail": "No excavation allowed after recent paving",
+  "lat": 33.80238,
+  "lng": -84.41735,
+  "validThrough": "{{iso+11}}"
+ },
+ {
+  "id": 23,
+  "kind": "nodig",
+  "street": "Irwin St NE",
+  "detail": "No excavation allowed after recent paving",
+  "lat": 33.75114,
+  "lng": -84.36265,
+  "validThrough": "{{iso+16}}"
+ },
+ {
+  "id": 24,
+  "kind": "nodig",
+  "street": "DeKalb Ave NE",
+  "detail": "No excavation allowed after recent paving",
+  "lat": 33.75561,
+  "lng": -84.36957,
+  "validThrough": "{{iso+78}}"
+ },
+ {
+  "id": 25,
+  "kind": "nodig",
+  "street": "Huff Rd NW",
+  "detail": "No excavation allowed after recent paving",
+  "lat": 33.80819,
+  "lng": -84.40711,
+  "validThrough": "{{iso+77}}"
+ },
+ {
+  "id": 26,
+  "kind": "nodig",
+  "street": "Boulevard NE",
+  "detail": "No excavation allowed after recent paving",
+  "lat": 33.75181,
+  "lng": -84.37135,
+  "validThrough": "{{iso+24}}"
+ },
+ {
+  "id": 27,
+  "kind": "building",
+  "street": "Edgewood Ave NE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.74852,
+  "lng": -84.36286,
+  "validThrough": "{{iso+23}}"
+ },
+ {
+  "id": 28,
+  "kind": "building",
+  "street": "Marietta St NW",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.80337,
+  "lng": -84.40987,
+  "validThrough": "{{iso+24}}"
+ },
+ {
+  "id": 29,
+  "kind": "building",
+  "street": "Irwin St NE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.75132,
+  "lng": -84.36626,
+  "validThrough": "{{iso+76}}"
+ },
+ {
+  "id": 30,
+  "kind": "building",
+  "street": "Edgewood Ave NE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.75437,
+  "lng": -84.37146,
+  "validThrough": "{{iso+78}}"
+ },
+ {
+  "id": 31,
+  "kind": "building",
+  "street": "Marietta St NW",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.80857,
+  "lng": -84.41921,
+  "validThrough": "{{iso+77}}"
+ },
+ {
+  "id": 32,
+  "kind": "building",
+  "street": "Krog St NE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.76012,
+  "lng": -84.36359,
+  "validThrough": "{{iso+59}}"
+ },
+ {
+  "id": 33,
+  "kind": "building",
+  "street": "Krog St NE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.75117,
+  "lng": -84.36857,
+  "validThrough": "{{iso+50}}"
+ },
+ {
+  "id": 34,
+  "kind": "building",
+  "street": "Howell Mill Rd NW",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.80673,
+  "lng": -84.40969,
+  "validThrough": "{{iso+62}}"
+ },
+ {
+  "id": 35,
+  "kind": "building",
+  "street": "DeKalb Ave NE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.74889,
+  "lng": -84.36996,
+  "validThrough": "{{iso+78}}"
+ },
+ {
+  "id": 36,
+  "kind": "building",
+  "street": "Edgewood Ave NE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.75675,
+  "lng": -84.359,
+  "validThrough": "{{iso+7}}"
+ },
+ {
+  "id": 37,
+  "kind": "building",
+  "street": "Huff Rd NW",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.80784,
+  "lng": -84.4056,
+  "validThrough": "{{iso+81}}"
+ },
+ {
+  "id": 38,
+  "kind": "building",
+  "street": "Boulevard NE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.75354,
+  "lng": -84.36803,
+  "validThrough": "{{iso+63}}"
+ },
+ {
+  "id": 39,
+  "kind": "building",
+  "street": "Irwin St NE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.75328,
+  "lng": -84.36821,
+  "validThrough": "{{iso+37}}"
+ },
+ {
+  "id": 40,
+  "kind": "building",
+  "street": "Huff Rd NW",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.80421,
+  "lng": -84.41458,
+  "validThrough": "{{iso+54}}"
+ },
+ {
+  "id": 41,
+  "kind": "building",
+  "street": "Boulevard NE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.75252,
+  "lng": -84.36135,
+  "validThrough": "{{iso+38}}"
+ },
+ {
+  "id": 42,
+  "kind": "building",
+  "street": "Krog St NE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.75224,
+  "lng": -84.3577,
+  "validThrough": "{{iso+84}}"
+ },
+ {
+  "id": 43,
+  "kind": "building",
+  "street": "Marietta St NW",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.80797,
+  "lng": -84.40664,
+  "validThrough": "{{iso+20}}"
+ },
+ {
+  "id": 44,
+  "kind": "building",
+  "street": "Decatur St SE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.75012,
+  "lng": -84.36454,
+  "validThrough": "{{iso+49}}"
+ },
+ {
+  "id": 45,
+  "kind": "building",
+  "street": "Boulevard NE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.75985,
+  "lng": -84.36475,
+  "validThrough": "{{iso+19}}"
+ },
+ {
+  "id": 46,
+  "kind": "building",
+  "street": "Chattahoochee Ave NW",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.79949,
+  "lng": -84.41022,
+  "validThrough": "{{iso+46}}"
+ },
+ {
+  "id": 47,
+  "kind": "building",
+  "street": "Decatur St SE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.75458,
+  "lng": -84.3609,
+  "validThrough": "{{iso+33}}"
+ },
+ {
+  "id": 48,
+  "kind": "building",
+  "street": "Boulevard NE",
+  "detail": "Building permit with sidewalk staging",
+  "lat": 33.74881,
+  "lng": -84.36732,
+  "validThrough": "{{iso+48}}"
+ }
+]

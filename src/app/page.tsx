@@ -1,10 +1,13 @@
 import Link from 'next/link';
-import { ensureDemoFresh } from '@/agent/demo';
+import { buttonsFor } from '@/actions/registry';
 import { ItemCard } from '@/components/ItemCard';
-import { getMeta } from '@/lib/db';
-import { formatTime } from '@/lib/format';
-import { latestRun, listByDecision } from '@/lib/store';
+import { FilterMenu, TextMenu } from '@/components/Menus';
+import { StreetWork, TopicTable } from '@/components/Sidebar';
+import { formatDate } from '@/lib/format';
+import { recallProducts, recallUpc } from '@/lib/products';
+import { allViews, latestRun } from '@/lib/store';
 import { TOPIC_LABELS, type DecisionKind, type Topic } from '@/lib/types';
+import { cn } from '@/lib/utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -13,50 +16,73 @@ const TABS: { id: string; label: string; kind: DecisionKind }[] = [
   { id: 'check', label: 'To check', kind: 'TO_CHECK' },
   { id: 'file', label: 'For the file', kind: 'FOR_THE_FILE' },
 ];
+const RANGES = [{ id: '3', label: 'Last 3 days' }, { id: '7', label: 'Last 7 days' }, { id: 'all', label: 'Everything read' }];
 
-export default async function Overview({ searchParams }: { searchParams: { tab?: string; topic?: string } }) {
-  await ensureDemoFresh();
-  const tab = TABS.find((t) => t.id === searchParams.tab) ?? TABS[0];
+export default function Overview({ searchParams }: { searchParams: { tab?: string; topic?: string; range?: string } }) {
+  const tabId = searchParams.tab === 'resolved' ? 'resolved' : TABS.find((t) => t.id === searchParams.tab)?.id ?? 'action';
   const topic = searchParams.topic && searchParams.topic in TOPIC_LABELS ? (searchParams.topic as Topic) : undefined;
-  const run = latestRun();
-  const inTab = listByDecision(tab.kind);
+  const range = RANGES.find((r) => r.id === searchParams.range) ?? RANGES[2];
+  const since = range.id === 'all' ? '' : new Date(Date.now() - Number(range.id) * 86_400_000).toISOString().slice(0, 10);
+
+  const views = allViews().filter((v) => v.publishedAt >= since);
+  const open = views.filter((v) => !v.resolvedAt);
+  const count = (k: DecisionKind) => open.filter((v) => v.decision.effective === k).length;
+  const inTab = tabId === 'resolved' ? views.filter((v) => v.resolvedAt) : open.filter((v) => v.decision.effective === TABS.find((t) => t.id === tabId)!.kind);
   const shown = topic ? inTab.filter((v) => v.topic === topic) : inTab;
-  const counts = Object.keys(TOPIC_LABELS).map((t) => [t as Topic, inTab.filter((v) => v.topic === t).length] as const).filter(([, n]) => n > 0);
-  const link = (q: Record<string, string | undefined>) => {
-    const p = new URLSearchParams(Object.entries(q).filter((e): e is [string, string] => !!e[1]));
+  const failures = latestRun()?.failures ?? [];
+  const actions = count('NEEDS_ACTION');
+  const dates = views.map((v) => v.publishedAt).sort();
+
+  const href = (q: { tab?: string; topic?: string; range?: string }) => {
+    const merged = { tab: tabId, range: range.id === 'all' ? undefined : range.id, ...q };
+    const p = new URLSearchParams(Object.entries(merged).filter((e): e is [string, string] => !!e[1]));
     return `/?${p}`;
   };
+  const topicLinks = (Object.keys(TOPIC_LABELS) as Topic[]).map((t) => ({ href: href({ topic: t }), label: TOPIC_LABELS[t], count: inTab.filter((v) => v.topic === t).length }));
+  const label = `${shown.length} ${tabId === 'resolved' ? 'resolved' : 'open'} ${topic ? `in ${TOPIC_LABELS[topic]}` : 'across every topic'}.`;
 
   return (
     <>
-      <section className="pb-8">
-        <p className="text-sm text-muted">{run ? `Checked today at ${formatTime(run.finishedAt ?? run.startedAt)} ET` : 'Not checked yet'}</p>
-        <h1 className="mt-2 font-serif text-3xl">
-          {run?.itemsRead ?? 0} items read. <span className="text-peach-deep">{run?.itemsSurfaced ?? 0} surfaced.</span>
+      <section className="dotted py-12 text-center sm:py-20">
+        <TextMenu
+          className="label mx-auto inline-flex items-center gap-2 text-ink/75"
+          label={dates.length ? `${formatDate(dates[0])} – ${formatDate(dates[dates.length - 1])}` : range.label}
+          links={RANGES.map((r) => ({ href: href({ range: r.id === 'all' ? undefined : r.id }), label: r.label }))}
+        />
+        <h1 className="hero mx-auto mt-5 max-w-3xl text-balance">
+          {actions ? `${actions} ${actions === 1 ? 'item needs' : 'items need'} you today.` : 'Nothing needs you today.'}
         </h1>
-        {getMeta('demo_date') && <p className="mt-3 text-xs text-muted">Demo data. Every firm, recall and ordinance here is invented. Resets daily.</p>}
-        {!!run?.failures.length && <p role="alert" className="mt-3 text-sm text-peach-deep">Not fully checked: {run.failures.join('; ')}.</p>}
+        <p className="mt-5 text-ink/75">{views.length} read · {views.filter((v) => v.decision.effective !== 'REJECT').length} brought to you</p>
+        {failures.length > 0 && <p role="alert" className="mt-4 text-sm text-brick-deep">Not fully checked: {failures.join('; ')}.</p>}
       </section>
 
-      <nav className="flex gap-6 border-b border-line text-sm">
-        {TABS.map((t) => (
-          <Link key={t.id} href={link({ tab: t.id })} className={`-mb-px border-b-2 pb-3 ${t.id === tab.id ? 'border-peach text-ink' : 'border-transparent text-muted hover:text-ink'}`}>
-            {t.label} <span className="text-muted">{listByDecision(t.kind).length}</span>
-          </Link>
-        ))}
-      </nav>
-
-      {counts.length > 1 && (
-        <div className="flex flex-wrap gap-2 pt-4 text-xs">
-          {counts.map(([t, n]) => (
-            <Link key={t} href={link({ tab: tab.id, topic: t === topic ? undefined : t })} className={`rounded-full px-3 py-1 ${t === topic ? 'bg-peach-soft text-peach-deep' : 'text-muted hover:text-ink'}`}>
-              {TOPIC_LABELS[t]} {n}
-            </Link>
-          ))}
+      <div className="grid gap-10 pt-10 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-14">
+        <div className="min-w-0">
+          <div className="flex items-start justify-between gap-3">
+            <nav className="grid flex-1 grid-cols-2 border border-ink text-sm sm:inline-grid sm:flex-none sm:grid-flow-col sm:auto-cols-auto">
+              {TABS.map((t) => (
+                <Link key={t.id} href={href({ tab: t.id, topic: undefined })} aria-current={t.id === tabId ? 'page' : undefined}
+                  className={cn('border-ink px-4 py-3 text-center sm:border-r', t.id === tabId ? 'bg-ink font-semibold text-paper' : 'hover:bg-panel')}>
+                  {t.label} <span className="ml-1 font-mono text-xs opacity-70">{count(t.kind)}</span>
+                </Link>
+              ))}
+              <TextMenu className="flex items-center justify-center gap-2 px-4 py-3 hover:bg-panel" label="The record" links={[
+                { href: '/rejected', label: 'Rejected log', count: views.filter((v) => v.decision.effective === 'REJECT').length },
+                { href: href({ tab: 'resolved', topic: undefined }), label: 'Resolved', count: views.filter((v) => v.resolvedAt).length },
+              ]} />
+            </nav>
+            <FilterMenu links={[{ href: href({ topic: undefined }), label: 'All topics', count: inTab.length }, ...topicLinks]} />
+          </div>
+          <h2 className="section-head mt-6">{label}</h2>
+          {shown.length
+            ? shown.map((v) => <ItemCard key={v.id} view={v} buttons={buttonsFor(v)} products={recallProducts(v)} upc={recallUpc(v.rawText)} />)
+            : <p className="py-16 text-center text-muted">Quiet here. That is the point.</p>}
         </div>
-      )}
-
-      {shown.length ? shown.map((v) => <ItemCard key={v.id} view={v} />) : <p className="py-16 text-center text-muted">Nothing here. That is the point.</p>}
+        <aside>
+          <TopicTable views={views} topicHref={(t) => href({ topic: t })} />
+          <StreetWork />
+        </aside>
+      </div>
     </>
   );
 }

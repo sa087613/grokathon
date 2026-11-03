@@ -36,6 +36,10 @@ export function overturn(itemId: string, kind: OverrideKind): boolean {
     .run(kind, nowIso(), itemId).changes > 0;
 }
 
+export function listResolved(): ItemView[] {
+  return allViews().filter((v) => !!v.resolvedAt);
+}
+
 export function resolveItem(itemId: string): boolean {
   return getDb().prepare('UPDATE items SET resolved_at = ? WHERE id = ?').run(nowIso(), itemId).changes > 0;
 }

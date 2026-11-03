@@ -66,6 +66,7 @@ flowchart LR
 | `src/agent/ask.ts`, `tools.ts` | Chat loop and DB tools |
 | `src/actions/registry.ts` | Every item button. Add one entry to add an action |
 | `src/lib/llm.ts` | Provider wrapper |
+| `docs/DESIGN.md` | Visual system and tokens |
 | `src/lib/store.ts` | All database reads and writes |
 
 Partners: the `partner_runs` table and `Item.partnerRuns` are in place and unused.

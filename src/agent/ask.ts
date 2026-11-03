@@ -32,7 +32,7 @@ function summarize(data: any): string {
   }
   if (data?.permits) {
     const permits = data.permits.map((p: any) => `- ${p.name}, ${p.issuer}: expires ${p.expires}`);
-    return `${data.businessName}, ${data.homeCounty} County. Permits:\n${permits.join('\n')}\nSuppliers: ${data.suppliers.join(', ')}.`;
+    return `${data.businessName}, ${data.homeCounty} County. Permits:\n${permits.join('\n')}\nSuppliers: ${data.carry.flatMap((c: any) => c.brands).join(', ')}.`;
   }
   return `${data.title}: ${data.decision.replace(/_/g, ' ').toLowerCase()}. ${data.reason}${data.suggestedAction ? ` ${data.suggestedAction}` : ''}`;
 }

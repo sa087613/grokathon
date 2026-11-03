@@ -63,6 +63,11 @@ export interface Permit {
   expires: string;
 }
 
+export interface CarryItem {
+  item: string;
+  brands: string[];
+}
+
 export interface StoreProfile {
   businessName: string;
   businessType: 'restaurant' | 'food_truck';
@@ -70,7 +75,9 @@ export interface StoreProfile {
   commissary: string;
   countiesOperated: string[];
   permits: Permit[];
-  suppliers: string[];
+  carry: CarryItem[];
+  /** Free-text facts the owner adds. The model reads these with the rest of the profile. */
+  notes: string[];
   headcount: number;
   baseLocation: string;
 }
@@ -81,3 +88,5 @@ export interface ItemView extends Item {
   resolvedAt: string | null;
   decision: DecisionRow;
 }
+
+export const carriedBrands = (p: StoreProfile): string[] => p.carry.flatMap((c) => c.brands);

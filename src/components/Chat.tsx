@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from './ui/button';
 
 type Msg = { role: 'user' | 'assistant'; content: string };
 
@@ -32,23 +33,23 @@ export function Chat({ item }: { item: { id: string; title: string } | null }) {
   }
 
   return (
-    <div>
-      {item && <p className="mb-4 text-sm text-muted">About: {item.title}</p>}
-      <div className="space-y-5" aria-live="polite">
+    <div className="flex min-h-0 flex-col">
+      {item && <p className="mb-3 text-sm text-muted">About: {item.title}</p>}
+      <div className="min-h-0 space-y-4 overflow-y-auto" aria-live="polite">
         {messages.map((m, i) => (
-          <p key={i} className={`whitespace-pre-line text-sm ${m.role === 'user' ? 'font-medium' : 'text-muted'}`}>{m.content}</p>
+          <p key={i} className={`whitespace-pre-line text-sm ${m.role === 'user' ? 'font-semibold' : 'text-ink/80'}`}>{m.content}</p>
         ))}
-        {busy && <p className="text-sm text-muted">Looking…</p>}
-        {error && <p role="alert" className="text-sm text-peach-deep">{error}</p>}
+        {busy && <p className="label text-muted">Looking</p>}
+        {error && <p role="alert" className="text-sm text-brick-deep">{error}</p>}
       </div>
       {!messages.length && !item && (
-        <div className="mb-4 flex flex-wrap gap-2">
-          {SUGGESTIONS.map((s) => <button key={s} onClick={() => send(s)} className="rounded-full border border-line px-3 py-1 text-xs text-muted hover:text-ink">{s}</button>)}
+        <div className="flex flex-wrap gap-2">
+          {SUGGESTIONS.map((s) => <button key={s} onClick={() => send(s)} className="border border-line-strong px-2.5 py-1 text-xs hover:bg-panel">{s}</button>)}
         </div>
       )}
-      <form className="mt-6 flex gap-2" onSubmit={(e) => { e.preventDefault(); send(input); }}>
-        <input aria-label="Your question" className="field" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ask about any item, permit or rejection" />
-        <button disabled={busy} className="rounded-md bg-peach-deep px-4 text-sm text-white hover:bg-peach disabled:opacity-50">Ask</button>
+      <form className="mt-4 flex gap-2" onSubmit={(e) => { e.preventDefault(); send(input); }}>
+        <input aria-label="Your question" className="field" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ask about a permit, recall or rejection" />
+        <Button disabled={busy}>Ask</Button>
       </form>
     </div>
   );

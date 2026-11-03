@@ -1,5 +1,5 @@
 import type { Item } from '@/lib/types';
-import { fetchText, readFixture, sourceMode } from './fixtures';
+import { readFixture, sourceMode } from './fixtures';
 
 interface Enforcement {
   recall_number: string;
@@ -15,10 +15,13 @@ interface Enforcement {
 const iso = (ymd: string) => `${ymd.slice(0, 4)}-${ymd.slice(4, 6)}-${ymd.slice(6, 8)}`;
 
 export function normalizeOpenFda(results: Enforcement[]): Item[] {
-  return results.map((r) => ({
+  return results.map((r) => {
+    const count = r.product_description.split(';').length;
+    const summary = count > 1 ? `${count} products, ${r.reason_for_recall.toLowerCase()}` : r.product_description.slice(0, 90);
+    return {
     id: `openfda:${r.recall_number}`,
-    source: 'openfda',
-    title: `${r.recalling_firm}: ${r.product_description.slice(0, 90)}`,
+    source: 'openfda' as const,
+    title: `${r.recalling_firm}: ${summary}`,
     url: 'https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts',
     publishedAt: iso(r.report_date),
     rawText: [
@@ -29,7 +32,8 @@ export function normalizeOpenFda(results: Enforcement[]): Item[] {
       `Distribution: ${r.distribution_pattern}`,
       r.code_info ? `Codes: ${r.code_info}` : '',
     ].filter(Boolean).join('\n'),
-  }));
+    };
+  });
 }
 
 export async function fetchOpenFda(): Promise<Item[]> {
