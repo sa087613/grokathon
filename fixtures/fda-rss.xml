@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<rss version="2.0"><channel><title>Recalls</title>
+<item><title>Blue Ridge Poultry recalls frozen chicken thighs for possible Listeria</title><link>https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts</link><description>Blue Ridge Poultry is recalling frozen boneless chicken thighs sold to restaurants in Georgia and North Carolina.</description><pubDate>{{iso-1}}T12:00:00Z</pubDate></item>
+<item><title>Old South Spice recalls ground cumin for elevated lead</title><link>https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts</link><description>Old South Spice is recalling 1 lb foodservice bags of ground cumin distributed nationwide.</description><pubDate>{{iso-3}}T12:00:00Z</pubDate></item>
+<item><title>Coastal Greens recalls bagged romaine for possible E. coli</title><link>https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts</link><description>Coastal Greens romaine distributed to wholesale foodservice accounts in Georgia and Florida.</description><pubDate>{{iso-2}}T12:00:00Z</pubDate></item>
+<item><title>Willow Creek recalls baby food pouches</title><link>https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts</link><description>Pouches sold at retail in the Midwest.</description><pubDate>{{iso-3}}T12:00:00Z</pubDate></item>
+<item><title>Happy Paws recalls dog treats for Salmonella</title><link>https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts</link><description>Pet treats sold online.</description><pubDate>{{iso-4}}T12:00:00Z</pubDate></item>
+<item><title>Alpine Chocolate recalls dark bars for undeclared milk</title><link>https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts</link><description>Sold through specialty retailers in Colorado.</description><pubDate>{{iso-5}}T12:00:00Z</pubDate></item>
+<item><title>Sunrise Smoothie recalls frozen fruit blend</title><link>https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts</link><description>Sold at retail in Oregon and Washington.</description><pubDate>{{iso-6}}T12:00:00Z</pubDate></item>
+<item><title>Vital Nutra recalls protein powder for undeclared peanut</title><link>https://www.fda.gov/safety/recalls-market-withdrawals-safety-alerts</link><description>Sold online to consumers.</description><pubDate>{{iso-7}}T12:00:00Z</pubDate></item>
+</channel></rss>

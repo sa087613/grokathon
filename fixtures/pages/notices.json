@@ -1,0 +1,162 @@
+[
+  {
+    "id": "page:n1",
+    "source": "atlanta-notices",
+    "title": "Mobile food vending permit renewal window opens",
+    "url": "https://www.atlantaga.gov/",
+    "publishedAt": "{{iso-1}}",
+    "rawText": "The City of Atlanta will accept mobile food vending permit renewals online. Renewals must be filed by {{long+21}}."
+  },
+  {
+    "id": "page:n2",
+    "source": "atlanta-notices",
+    "title": "Atlanta Police vendor permit: new photo ID requirement",
+    "url": "https://www.atlantaga.gov/",
+    "publishedAt": "{{iso-2}}",
+    "rawText": "Vendor permit holders must present updated photo ID for each employee working a food truck."
+  },
+  {
+    "id": "page:n3",
+    "source": "atlanta-notices",
+    "title": "Howell Mill Rd lane closure for water main work",
+    "url": "https://www.atlantaga.gov/",
+    "publishedAt": "{{iso-1}}",
+    "rawText": "Northbound Howell Mill Rd reduced to one lane from {{long+3}}. Expect delays near Chattahoochee Ave."
+  },
+  {
+    "id": "page:n4",
+    "source": "atlanta-notices",
+    "title": "Edgewood Ave milling and paving overnight",
+    "url": "https://www.atlantaga.gov/",
+    "publishedAt": "{{iso-0}}",
+    "rawText": "Curb lane on Edgewood Ave NE closed for milling beginning {{long+5}}. Curbside parking removed."
+  },
+  {
+    "id": "page:n5",
+    "source": "atlanta-notices",
+    "title": "Krog Street detour for bridge inspection",
+    "url": "https://www.atlantaga.gov/",
+    "publishedAt": "{{iso-2}}",
+    "rawText": "Krog Street tunnel approach detour beginning {{long+2}}."
+  },
+  {
+    "id": "page:n6",
+    "source": "atlanta-notices",
+    "title": "Moreland Ave milling project phase two",
+    "url": "https://www.atlantaga.gov/",
+    "publishedAt": "{{iso-1}}",
+    "rawText": "Milling on Moreland Ave north of I-20."
+  },
+  {
+    "id": "page:n7",
+    "source": "atlanta-notices",
+    "title": "Northside Dr water main repair closure",
+    "url": "https://www.atlantaga.gov/",
+    "publishedAt": "{{iso-3}}",
+    "rawText": "Lane closure at Northside Dr and 14th St."
+  },
+  {
+    "id": "page:n8",
+    "source": "atlanta-notices",
+    "title": "Moreland Ave milling project",
+    "url": "https://www.atlantaga.gov/",
+    "publishedAt": "{{iso-3}}",
+    "rawText": "Milling on Moreland Ave south of I-20."
+  },
+  {
+    "id": "page:n9",
+    "source": "atlanta-notices",
+    "title": "Piedmont Rd detour for gas line work",
+    "url": "https://www.atlantaga.gov/",
+    "publishedAt": "{{iso-4}}",
+    "rawText": "Detour on Piedmont Rd near Lindbergh."
+  },
+  {
+    "id": "page:n10",
+    "source": "atlanta-notices",
+    "title": "Peachtree Rd paving schedule",
+    "url": "https://www.atlantaga.gov/",
+    "publishedAt": "{{iso-4}}",
+    "rawText": "Overnight paving on Peachtree Rd in Buckhead."
+  },
+  {
+    "id": "page:n11",
+    "source": "atlanta-notices",
+    "title": "Boulevard lane closure",
+    "url": "https://www.atlantaga.gov/",
+    "publishedAt": "{{iso-5}}",
+    "rawText": "Lane closure on Boulevard NE near Ponce."
+  },
+  {
+    "id": "page:n12",
+    "source": "atlanta-notices",
+    "title": "Sign permit fee schedule update",
+    "url": "https://www.atlantaga.gov/",
+    "publishedAt": "{{iso-5}}",
+    "rawText": "New fee schedule for commercial sign permits."
+  },
+  {
+    "id": "page:n13",
+    "source": "atlanta-notices",
+    "title": "Sidewalk cafe permit guidance for restaurants",
+    "url": "https://www.atlantaga.gov/",
+    "publishedAt": "{{iso-3}}",
+    "rawText": "Updated guidance for restaurants using sidewalk seating."
+  },
+  {
+    "id": "page:n14",
+    "source": "county-health",
+    "title": "Fulton County Board of Health: mobile food unit fee increase",
+    "url": "https://fultoncountyboh.com/",
+    "publishedAt": "{{iso-1}}",
+    "rawText": "Fulton County Board of Health will raise the annual mobile food unit permit fee effective {{long+30}}."
+  },
+  {
+    "id": "page:n15",
+    "source": "county-health",
+    "title": "Fulton County Board of Health: commissary log rule for mobile units",
+    "url": "https://fultoncountyboh.com/",
+    "publishedAt": "{{iso-2}}",
+    "rawText": "Mobile food units must keep a dated commissary servicing log on board, effective {{long+45}}."
+  },
+  {
+    "id": "page:n16",
+    "source": "county-health",
+    "title": "DeKalb County Board of Health: mobile food unit inspection form revised",
+    "url": "https://fultoncountyboh.com/",
+    "publishedAt": "{{iso-3}}",
+    "rawText": "DeKalb County Board of Health revised its mobile food inspection checklist for units operating in the county."
+  },
+  {
+    "id": "page:n17",
+    "source": "county-health",
+    "title": "Fulton County Board of Health: allergen training reminder for food service",
+    "url": "https://fultoncountyboh.com/",
+    "publishedAt": "{{iso-4}}",
+    "rawText": "Reminder to all food service establishments about allergen awareness training."
+  },
+  {
+    "id": "page:n18",
+    "source": "county-health",
+    "title": "Cobb County Board of Health: pool inspection fee update",
+    "url": "https://fultoncountyboh.com/",
+    "publishedAt": "{{iso-4}}",
+    "rawText": "Cobb County pool inspection fee schedule revised."
+  },
+  {
+    "id": "page:n19",
+    "source": "county-health",
+    "title": "Gwinnett County Board of Health: mobile unit plan review change",
+    "url": "https://fultoncountyboh.com/",
+    "publishedAt": "{{iso-5}}",
+    "rawText": "Gwinnett County plan review now online."
+  },
+  {
+    "id": "page:n20",
+    "source": "county-health",
+    "title": "DeKalb County Board of Health: tattoo studio rule update",
+    "url": "https://fultoncountyboh.com/",
+    "publishedAt": "{{iso-6}}",
+    "rawText": "Body art studio rule change."
+  }
+]

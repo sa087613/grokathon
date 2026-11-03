@@ -1,0 +1,144 @@
+{
+  "results": [
+    {
+      "recall_number": "F-1001-2026",
+      "recalling_firm": "Sunbelt Produce Co",
+      "product_description": "Diced yellow onions, 5 lb foodservice bags",
+      "reason_for_recall": "Potential Salmonella contamination",
+      "distribution_pattern": "GA, AL, SC, TN foodservice distributors",
+      "classification": "Class I",
+      "report_date": "{{ymd-0}}",
+      "code_info": "Lots 1A through 1F"
+    },
+    {
+      "recall_number": "F-1002-2026",
+      "recalling_firm": "Red Clay Tortilla",
+      "product_description": "Corn tortillas, 6 inch, 80 count",
+      "reason_for_recall": "Undeclared wheat",
+      "distribution_pattern": "Georgia restaurants and wholesale",
+      "classification": "Class II",
+      "report_date": "{{ymd-1}}",
+      "code_info": "Lots 2A through 2F"
+    },
+    {
+      "recall_number": "F-1003-2026",
+      "recalling_firm": "Prairie Lake Dairy",
+      "product_description": "Shredded Monterey Jack, 5 lb foodservice bags",
+      "reason_for_recall": "Potential Listeria monocytogenes",
+      "distribution_pattern": "Nationwide wholesale and foodservice",
+      "classification": "Class I",
+      "report_date": "{{ymd-2}}",
+      "code_info": "Lots 3A through 3F"
+    },
+    {
+      "recall_number": "F-1004-2026",
+      "recalling_firm": "Harbor North Seafood",
+      "product_description": "Frozen cod fillets",
+      "reason_for_recall": "Temperature abuse in transit",
+      "distribution_pattern": "WA, OR, ID retail stores",
+      "classification": "Class II",
+      "report_date": "{{ymd-1}}",
+      "code_info": "Lots 4A through 4F"
+    },
+    {
+      "recall_number": "F-1005-2026",
+      "recalling_firm": "Maple Hollow Bakery",
+      "product_description": "Blueberry muffins, 4 pack",
+      "reason_for_recall": "Undeclared milk",
+      "distribution_pattern": "VT, NH, ME retail",
+      "classification": "Class II",
+      "report_date": "{{ymd-2}}",
+      "code_info": "Lots 5A through 5F"
+    },
+    {
+      "recall_number": "F-1006-2026",
+      "recalling_firm": "Golden Mesa Snacks",
+      "product_description": "Kettle potato chips, 2 oz",
+      "reason_for_recall": "Undeclared soy",
+      "distribution_pattern": "AZ, NM retail",
+      "classification": "Class III",
+      "report_date": "{{ymd-3}}",
+      "code_info": "Lots 6A through 6F"
+    },
+    {
+      "recall_number": "F-1007-2026",
+      "recalling_firm": "Northwind Beverages",
+      "product_description": "Sparkling lemonade, 12 oz cans",
+      "reason_for_recall": "Under-processing",
+      "distribution_pattern": "MN, WI, IA retail",
+      "classification": "Class II",
+      "report_date": "{{ymd-3}}",
+      "code_info": "Lots 7A through 7F"
+    },
+    {
+      "recall_number": "F-1008-2026",
+      "recalling_firm": "Tidewater Pickle Works",
+      "product_description": "Bread and butter pickles, 16 oz",
+      "reason_for_recall": "Foreign material, glass",
+      "distribution_pattern": "VA, MD retail",
+      "classification": "Class II",
+      "report_date": "{{ymd-4}}",
+      "code_info": "Lots 8A through 8F"
+    },
+    {
+      "recall_number": "F-1009-2026",
+      "recalling_firm": "Sierra Nut Company",
+      "product_description": "Roasted almonds, 8 oz",
+      "reason_for_recall": "Potential Salmonella",
+      "distribution_pattern": "CA, NV retail",
+      "classification": "Class I",
+      "report_date": "{{ymd-4}}",
+      "code_info": "Lots 9A through 9F"
+    },
+    {
+      "recall_number": "F-1010-2026",
+      "recalling_firm": "Lone Oak Farms",
+      "product_description": "Liquid egg whites, 32 oz",
+      "reason_for_recall": "Off-odor reported",
+      "distribution_pattern": "TX, OK retail",
+      "classification": "Class III",
+      "report_date": "{{ymd-5}}",
+      "code_info": "Lots 10A through 10F"
+    },
+    {
+      "recall_number": "F-1011-2026",
+      "recalling_firm": "Evergreen Sprouts",
+      "product_description": "Alfalfa sprouts, 4 oz",
+      "reason_for_recall": "Potential E. coli O157",
+      "distribution_pattern": "OR retail",
+      "classification": "Class I",
+      "report_date": "{{ymd-5}}",
+      "code_info": "Lots 11A through 11F"
+    },
+    {
+      "recall_number": "F-1012-2026",
+      "recalling_firm": "Great Plains Grain",
+      "product_description": "Rolled oats, 42 oz",
+      "reason_for_recall": "Undeclared wheat",
+      "distribution_pattern": "KS, NE retail",
+      "classification": "Class II",
+      "report_date": "{{ymd-6}}",
+      "code_info": "Lots 12A through 12F"
+    },
+    {
+      "recall_number": "F-1013-2026",
+      "recalling_firm": "Bayou Spice House",
+      "product_description": "Cajun seasoning, 6 oz",
+      "reason_for_recall": "Elevated lead",
+      "distribution_pattern": "LA, MS retail",
+      "classification": "Class II",
+      "report_date": "{{ymd-6}}",
+      "code_info": "Lots 13A through 13F"
+    },
+    {
+      "recall_number": "F-1014-2026",
+      "recalling_firm": "Cold Spring Creamery",
+      "product_description": "Vanilla ice cream, pints",
+      "reason_for_recall": "Foreign material, metal",
+      "distribution_pattern": "NY, NJ retail",
+      "classification": "Class II",
+      "report_date": "{{ymd-7}}",
+      "code_info": "Lots 14A through 14F"
+    }
+  ]
+}
