@@ -26,7 +26,7 @@ export function sourceMode(): 'fixture' | 'live' {
   return process.env.RADAR_SOURCES === 'live' ? 'live' : 'fixture';
 }
 
-export const USER_AGENT = 'PeachtreeRadar/0.1 (compliance monitoring)';
+export const USER_AGENT = 'ComplyRadar/0.1 (compliance monitoring)';
 
 export async function fetchText(url: string): Promise<string> {
   const res = await fetch(url, { headers: { 'user-agent': USER_AGENT }, signal: AbortSignal.timeout(20_000) });

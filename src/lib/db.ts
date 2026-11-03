@@ -62,7 +62,7 @@ let db: Database.Database | null = null;
 
 export function getDb(): Database.Database {
   if (db) return db;
-  const file = process.env.PEACHTREE_DB ?? path.join(process.cwd(), 'data', 'peachtree.db');
+  const file = process.env.COMPLY_DB ?? path.join(process.cwd(), 'data', 'comply.db');
   if (file !== ':memory:') fs.mkdirSync(path.dirname(file), { recursive: true });
   db = new Database(file);
   db.pragma('journal_mode = WAL');

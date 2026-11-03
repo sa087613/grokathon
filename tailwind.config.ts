@@ -17,7 +17,7 @@ export default {
         muted: v('muted'),
         line: v('line'),
         'line-strong': v('line-strong'),
-        peach: v('peach'),
+        accent: v('accent'),
         brick: { DEFAULT: v('coral'), soft: v('coral-soft') },
         link: { DEFAULT: v('link'), soft: v('link-soft') },
         job: { street: v('coral'), repaving: v('amber'), nodig: v('link'), building: v('muted') },

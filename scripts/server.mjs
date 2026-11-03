@@ -8,7 +8,7 @@ export async function withServer(fn) {
   execSync('npx next build', { stdio: 'inherit', env: { ...process.env, NEXT_TELEMETRY_DISABLED: '1', NEXT_DIST_DIR: '.next-check' } });
   const db = 'data/check.db';
   for (const f of [db, `${db}-wal`, `${db}-shm`]) fs.rmSync(f, { force: true });
-  const server = spawn('npx', ['next', 'start', '-p', '3100'], { env: { ...process.env, NEXT_DIST_DIR: '.next-check', PEACHTREE_DB: db, LLM_MODE: 'fixture', PARTNER_MODE: 'simulated' }, stdio: 'ignore', detached: true });
+  const server = spawn('npx', ['next', 'start', '-p', '3100'], { env: { ...process.env, NEXT_DIST_DIR: '.next-check', COMPLY_DB: db, LLM_MODE: 'fixture', PARTNER_MODE: 'simulated' }, stdio: 'ignore', detached: true });
   try {
     for (let i = 0; ; i++) {
       if (await fetch(BASE).then((r) => r.ok, () => false)) break;

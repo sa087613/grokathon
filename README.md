@@ -1,12 +1,12 @@
-# Peachtree
+# Comply
 
-A compliance radar for restaurants and food trucks in Atlanta that shows the owner only what they must act on.
+Comply watches the rules for restaurants and food trucks in Atlanta and tells owners only what needs them.
 
 ## What it does
 
 An Atlanta food business answers to the FDA, its county Board of Health (Fulton or DeKalb), the city, and Atlanta Police. Trucks need a health permit in each county they work. Nobody running a kitchen has time to read all of that.
 
-Silence is the product. Each morning Peachtree:
+Silence is the product. Each morning Comply:
 
 - Reads recall and regulatory sources.
 - Triages every item against a store profile: permits, counties, commissary, suppliers, location.
@@ -113,7 +113,7 @@ Everything in the demo is a fixture. All firms, recalls, ordinances and street j
 | Atlanta permit and street notices | Fixture | City planning page fetched; DOT page failed |
 | Street work map | Fixture | No live source |
 
-Map tiles need internet. Offline, the map shows a plain background and markers. Peachtree can miss things and is not legal advice.
+Map tiles need internet. Offline, the map shows a plain background and markers. Comply can miss things and is not legal advice.
 
 ## Tech stack, structure, tests, license
 

@@ -11,7 +11,7 @@ const BUILT = [
   ['Sources', 'openFDA, FDA recall RSS, Atlanta City Council, city and county page watch'],
 ];
 
-/** Our own mark: a radar sweep with one peach-shaped return among quiet dots. */
+/** Our own mark: a radar sweep with one accent return among quiet dots. */
 function RadarArt() {
   return (
     <svg viewBox="0 0 420 240" className="mx-auto h-auto w-full max-w-md" fill="none" stroke="#ECE8E1" strokeWidth="2" aria-hidden="true">
@@ -20,7 +20,6 @@ function RadarArt() {
       <path d="M210 225 300 62" stroke="#E5645A" />
       {[[90, 170], [140, 120], [165, 190], [255, 180], [340, 195], [120, 205], [235, 100]].map(([x, y]) => <rect key={x} x={x} y={y} width="6" height="6" fill="#9B958A" stroke="none" />)}
       <circle cx="306" cy="98" r="20" fill="#FFB48A" stroke="#121110" />
-      <path d="M306 78c-5 8-5 32 0 40M306 78c2-9 10-11 18-9-2 9-10 12-18 9z" fill="#E5645A" stroke="#121110" />
     </svg>
   );
 }
@@ -33,7 +32,7 @@ export default function About() {
     <>
       <section className="py-12 text-center sm:py-20">
         <h1 className="hero">Why it stays quiet</h1>
-        <p className="mx-auto mt-5 max-w-xl text-ink/75">Peachtree reads the public record for one Atlanta restaurant or food truck and speaks up only when something touches it. Silence is the product.</p>
+        <p className="mx-auto mt-5 max-w-xl text-ink/75">Comply reads the public record for one Atlanta restaurant or food truck and speaks up only when something touches it. Silence is the product.</p>
         <div className="mt-12"><RadarArt /></div>
       </section>
       <div className="mx-auto max-w-3xl space-y-12">
@@ -72,7 +71,7 @@ export default function About() {
             ))}
           </dl>
         </section>
-        <p className="text-sm text-muted">Peachtree is a monitoring aid and can miss things. It is not legal advice and does not replace your own permit deadlines or your county inspector.</p>
+        <p className="text-sm text-muted">Comply is a monitoring aid and can miss things. It is not legal advice and does not replace your own permit deadlines or your county inspector.</p>
       </div>
     </>
   );

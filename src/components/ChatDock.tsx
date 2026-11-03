@@ -6,7 +6,7 @@ import { Chat } from './Chat';
 
 type ChatItem = { id: string; title: string };
 
-export const openChat = (item: ChatItem | null = null) => window.dispatchEvent(new CustomEvent('peachtree:ask', { detail: item }));
+export const openChat = (item: ChatItem | null = null) => window.dispatchEvent(new CustomEvent('comply:ask', { detail: item }));
 
 export function ChatDock() {
   const [open, setOpen] = useState(false);
@@ -14,8 +14,8 @@ export function ChatDock() {
 
   useEffect(() => {
     const listener = (e: Event) => { setItem((e as CustomEvent<ChatItem | null>).detail); setOpen(true); };
-    window.addEventListener('peachtree:ask', listener);
-    return () => window.removeEventListener('peachtree:ask', listener);
+    window.addEventListener('comply:ask', listener);
+    return () => window.removeEventListener('comply:ask', listener);
   }, []);
 
   return (
@@ -30,7 +30,7 @@ export function ChatDock() {
         </section>
       )}
       <button aria-label="Ask the radar" onClick={() => { setItem(null); setOpen(!open); }}
-        className="fixed bottom-5 right-5 z-[940] flex h-14 w-14 items-center justify-center rounded-full bg-peach text-paper hover:bg-ink sm:right-8">
+        className="fixed bottom-5 right-5 z-[940] flex h-14 w-14 items-center justify-center rounded-full bg-accent text-paper hover:bg-ink sm:right-8">
         <MessageCircle className="h-6 w-6" />
       </button>
     </>

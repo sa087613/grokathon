@@ -10,10 +10,10 @@ export function plainBrief(v: ItemView): string {
     d.deadline ? `Deadline: ${d.deadline}` : '',
     `Source: ${v.url}`,
     '',
-    'Sent from Peachtree.',
+    'Sent from Comply.',
   ].filter((l, i) => l !== '' || i === 1 || i === 6).join('\n');
 }
 
 export function mailtoHref(v: ItemView): string {
-  return `mailto:?subject=${encodeURIComponent(`Peachtree: ${v.title}`)}&body=${encodeURIComponent(plainBrief(v))}`;
+  return `mailto:?subject=${encodeURIComponent(`Comply brief: ${v.title}`)}&body=${encodeURIComponent(plainBrief(v))}`;
 }

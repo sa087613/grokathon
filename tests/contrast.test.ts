@@ -18,12 +18,12 @@ const BACKGROUNDS = ['paper', 'panel', 'raise'];
 
 describe('WCAG AA contrast', () => {
   for (const bg of BACKGROUNDS) {
-    for (const fg of ['ink', 'muted', 'coral', 'link', 'peach']) {
+    for (const fg of ['ink', 'muted', 'coral', 'link', 'accent']) {
       it(`${fg} on ${bg}`, () => expect(ratio(rgb(fg), rgb(bg))).toBeGreaterThanOrEqual(4.5));
     }
     it(`70% ink on ${bg}`, () => expect(ratio(mix(rgb('ink'), rgb(bg), 0.7), rgb(bg))).toBeGreaterThanOrEqual(4.5));
   }
   it.each([
-    ['coral', 'coral-soft'], ['paper', 'coral'], ['paper', 'ink'], ['paper', 'peach'], ['ink', 'line'], ['link', 'link-soft'],
+    ['coral', 'coral-soft'], ['paper', 'coral'], ['paper', 'ink'], ['paper', 'accent'], ['ink', 'line'], ['link', 'link-soft'],
   ])('%s on %s', (fg, bg) => expect(ratio(rgb(fg), rgb(bg))).toBeGreaterThanOrEqual(4.5));
 });

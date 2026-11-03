@@ -1,10 +1,8 @@
-/** A peach reduced to a circle, a crease and a leaf. */
+/** A plain C. */
 export function Logomark({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" className={className} aria-hidden="true" fill="none">
-      <circle cx="15" cy="18" r="11" fill="currentColor" />
-      <path d="M15 8c-3 3-3 17 0 21" stroke="rgb(var(--paper))" strokeWidth="1.6" />
-      <path d="M15 8c1-5 6-6 11-5-1 5-6 7-11 5z" fill="currentColor" />
+      <path d="M25 9.2a11.5 11.5 0 1 0 0 13.6" stroke="currentColor" strokeWidth="5" />
     </svg>
   );
 }

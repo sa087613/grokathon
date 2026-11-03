@@ -1,4 +1,4 @@
-# Peachtree design system
+# Comply design system
 
 Dark only, with no light toggle. Terminal meets newspaper: square corners, no shadows, no gradients. Values are CSS variables in `src/app/globals.css`, mapped in `tailwind.config.ts`.
 
@@ -14,10 +14,10 @@ Dark only, with no light toggle. Terminal meets newspaper: square corners, no sh
 | `brick` | `--coral` | `#E5645A` | Urgency: badge, flagged counts, alert text and border |
 | `brick-soft` | `--coral-soft` | `#2A1614` | Alert strip fill |
 | `link` / `link-soft` | `--link` / `--link-soft` | `#7AA7FF` / `#1E273A` | Links, focus, action hover |
-| `peach` | `--peach` | `#FFB48A` | Logomark, active nav underline, chat button only |
+| `accent` | `--accent` | `#FFB48A` | Logomark, active nav underline, chat button only |
 | `job.*` | coral, amber, link, muted | | Map markers and legend: street, repaving, no-dig, building |
 
-**Filled controls.** Text on coral, peach and off-white fills is dark `paper`, never white.
+**Filled controls.** Text on coral, accent and off-white fills is dark `paper`, never white.
 
 **Contrast.** `tests/contrast.test.ts` reads the variables and fails below 4.5:1. Hairlines and borders are decorative and exempt.
 
