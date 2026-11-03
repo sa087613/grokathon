@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { @apply bg-paper text-ink font-sans antialiased; }
+.field { @apply w-full rounded-md border border-line bg-white px-3 py-2 text-sm focus:border-peach focus:outline-none; }
