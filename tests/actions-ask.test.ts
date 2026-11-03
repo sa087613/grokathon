@@ -11,7 +11,7 @@ beforeAll(async () => { await seedDemo(); });
 describe('actions', () => {
   it('offers the card actions on surfaced items', () => {
     const v = allViews().find((x) => x.decision.effective === 'NEEDS_ACTION')!;
-    expect(buttonsFor(v).map((b) => b.label)).toEqual(['Resolve', 'Share via email', "Didn't need this", 'Ask']);
+    expect(buttonsFor(v).map((b) => b.label)).toEqual(['Resolve', 'Share via email', "Didn't need this", 'Ask', 'Hand to Grok Bot']);
   });
 
   it('adds a new button with one registry entry', () => {

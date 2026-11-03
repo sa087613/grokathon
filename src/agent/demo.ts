@@ -5,7 +5,8 @@ import type { StoreProfile } from '@/lib/types';
 import { triagePending } from './radar';
 
 const addDays = (n: number) => new Date(Date.now() + n * 86_400_000).toISOString().slice(0, 10);
-const today = () => new Date().toISOString().slice(0, 10);
+// Local date, so the daily reset can't fire mid-evening at the UTC rollover.
+const today = () => new Date().toLocaleDateString('en-CA');
 
 export function demoProfile(): StoreProfile {
   return {

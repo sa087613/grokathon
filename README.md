@@ -1,82 +1,138 @@
 # Peachtree
 
-A compliance radar for Atlanta restaurants and food trucks. Each morning an agent reads recall and regulatory sources, triages every item against a store profile, and surfaces only what the owner must act on. Everything rejected is logged with a one-line reason, and any rejection can be overturned. Overturns feed later triage.
+A compliance radar for restaurants and food trucks in Atlanta that shows the owner only what they must act on.
 
-Silence is the product.
+## What it does
 
-## Setup
+An Atlanta food business answers to the FDA, its county Board of Health (Fulton or DeKalb), the city, and Atlanta Police. Trucks need a health permit in each county they work. Nobody running a kitchen has time to read all of that.
 
-Needs Node 20 or later. No keys are required.
+Silence is the product. Each morning Peachtree:
 
-```bash
-npm install && npm run seed && npm run dev
-```
+- Reads recall and regulatory sources.
+- Triages every item against a store profile: permits, counties, commissary, suppliers, location.
+- Logs every rejection with a one-line reason.
+- Lets the owner overturn any call. Overturns are retrieved as examples on later runs.
+- Screens long documents by title first, and gives only survivors a full read.
+- Answers questions in Ask the radar, grounded in its database.
+- Shares any item as a plain-text email brief.
 
-Open http://localhost:3000. All demo content is invented: no real firm, recall or ordinance appears in it.
+## Screenshots
 
-| Command | What it does |
-| --- | --- |
-| `npm run seed` | Wipes the database and rebuilds the demo through the real pipeline |
-| `npm run radar:run` | Runs the daily job |
-| `npm run radar:reset` | Same as seed, for a daily cron |
-| `npm test` | Runs the vitest suite |
+![Overview](docs/screenshots/overview.png)
+![Rejected log](docs/screenshots/rejected.png)
+![Grok Bot handoff](docs/screenshots/grokbot.png)
 
-Demo data also resets itself on the first page load of a new day. That wipes demo overturns and profile edits.
-
-## Going live
-
-Copy `.env.example` to `.env`, then export it for the job (`tsx` does not load `.env` itself).
-
-- `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` turns on real triage and chat. With neither, FIXTURE mode uses canned rules.
-- Real embeddings need `OPENAI_API_KEY`. Otherwise a local hashed embedding is used, including alongside Anthropic.
-- `RADAR_SOURCES=live` fetches real sources. Run this on a database without the demo, or the daily reset will wipe it: delete the `demo_date` row from `meta` after entering your own profile.
-
-A source that fails is named in the Overview header and is never replaced with fixture data, because silence must not read as all clear. Fixture PDFs are therefore the fallback for demo runs only.
-
-Known live gaps as of November 2026: some atlantaga.gov and dekalbpublichealth.com pages answer automated requests with 403, and the council committee agenda pages expose no document links to a static scrape, so those sources show as unavailable. openFDA, the FDA RSS feed and the Fulton County environmental health page work.
-
-## Architecture
+## How it works
 
 ```mermaid
 flowchart LR
-  subgraph Sources
-    A[openFDA] & B[FDA RSS] & C[Council agendas and PDFs] & D[City and county page watch]
-  end
-  Sources --> I[src/ingest: normalize to Item]
-  I --> E[Embed and retrieve 5 similar decisions]
-  E --> S{Long document?}
-  S -- yes --> T[Cheap title screen]
-  T -- REJECT --> DB[(SQLite decisions)]
-  T -- INVESTIGATE --> F[Full read]
-  S -- no --> F
-  F --> DB
-  DB --> UI[Overview, Rejected log, Ask]
-  UI -- overturns --> DB
-  DB -. precedent .-> E
-  L[src/lib/llm.ts: Anthropic, OpenAI, FIXTURE] --- T & F
-  UI --- R[src/actions/registry.ts]
+  S[Sources] --> I[Ingest and normalize]
+  I --> E[Embed]
+  E --> R[Retrieve 5 similar decisions]
+  R --> T[LLM triage]
+  T --> D[(SQLite)]
+  D --> U[Next.js UI]
+  U -- overturns --> D
+  D -. precedent .-> R
+  U -- task packet --> G[Grok Bot]
+  G --> A{Owner approves?}
+  A -- yes --> X[Done]
+  A -- status --> D
 ```
 
-| Module | Job |
+## Agent partner: Grok Bot
+
+Hand to Grok Bot on a surfaced item creates a task packet. The run moves through Drafted, Sent to bot and Awaiting approval, then stops at the approval gate until the owner approves. See the [playbook](docs/PLAYBOOK.md).
+
+- **Local demo:** `PARTNER_MODE=simulated` is the default. It is labeled SIMULATED and sends nothing. `PARTNER_MODE=manual` shows a copy-ready packet, and the owner sets the status by hand.
+- **Recorded real run:** link to come. `<!-- add link -->`
+
+This repo has no live Grok Bot connection.
+
+## Built with Cursor
+
+The repo is set up for agents:
+
+- [AGENTS.md](AGENTS.md): working rules.
+- [.cursor/rules](.cursor/rules/project.mdc): points Cursor at those rules.
+- [docs/TASKS](docs/TASKS/README.md): task briefs.
+- [docs/DEVLOG.md](docs/DEVLOG.md): log of finished tasks.
+
+| Task | Evidence |
 | --- | --- |
-| `src/ingest/` | One fetcher per source, each returning `Item[]` |
-| `src/agent/triage.ts` | Two-stage decision for one item |
-| `src/agent/fixtureBrain.ts` | Canned decisions for zero-key runs |
-| `src/agent/retrieve.ts` | Embeddings and similar past decisions |
-| `src/agent/ask.ts`, `tools.ts` | Chat loop and DB tools |
-| `src/actions/registry.ts` | Every item button. Add one entry to add an action |
-| `src/lib/llm.ts` | Provider wrapper |
-| `docs/DESIGN.md` | Visual system and tokens |
-| `src/lib/store.ts` | All database reads and writes |
+| No tasks recorded yet | `<!-- add link -->` |
 
-Partners: the `partner_runs` table and `Item.partnerRuns` are in place and unused.
+## Run it locally
 
-## 90-second demo
+No keys or internet needed after install.
 
-1. **0:00 Overview.** "60 items read, 21 surfaced." The owner never saw the other 39.
-2. **0:15 Needs action.** Open the Sunbelt Produce recall. It names a supplier this truck carries, with a suggested action.
-3. **0:30 Different counties.** Open Rejected and find the Cobb and Gwinnett notices: this truck works Fulton and DeKalb only.
-4. **0:40 Two-stage read.** Find the bond refunding resolution in Rejected. It was dropped on its title. The vending ordinance's staff report PDF was read in full and carries a deadline.
-5. **0:55 Feedback.** Under To check, open "Moreland Ave milling project phase two". The owner overturned phase one, so this one surfaced by precedent, though it is off the usual route.
-6. **1:10 Ask.** "What do I need to do today?" then "When do my permits expire?"
-7. **1:25 Share.** Share via email opens a plain-text brief.
+```bash
+npm install
+```
+
+```bash
+npm run demo:setup
+```
+
+```bash
+npm run dev
+```
+
+Open http://localhost:3000. To return to the exact demo state between takes:
+
+```bash
+npm run demo:reset
+```
+
+Optional settings are in [.env.example](.env.example).
+
+## Demo walkthrough
+
+Full script: [docs/DEMO.md](docs/DEMO.md).
+
+1. Overview: 60 read, 21 brought to you.
+2. Needs action: Sunbelt Produce Co, Show the products.
+3. The record, Rejected log: resolution 26-R-3380.
+4. Document analysis: Ordinance 26-O-1412, Show details.
+5. To check: Moreland Ave milling project phase two, the feedback example.
+6. Chat button: "What do I need to do today?"
+7. Share via email on the Sunbelt card.
+8. Hand to Grok Bot, then Approve.
+
+## Data sources and limits
+
+Everything in the demo is a fixture. All firms, recalls, ordinances and street jobs are invented.
+
+| Source | In the demo | Live (`RADAR_SOURCES=live`) |
+| --- | --- | --- |
+| openFDA food enforcement | Fixture | Works |
+| FDA recall RSS | Fixture | Works |
+| Atlanta City Council agendas | Fixture HTML and PDFs | Not working: no document links on a static scrape, reported as a failure |
+| Fulton County health notices | Fixture | Environmental health page works; food service page failed in the last check |
+| DeKalb County health notices | Fixture | Blocked with 403 |
+| Atlanta permit and street notices | Fixture | City planning page fetched; DOT page failed |
+| Street work map | Fixture | No live source |
+
+Map tiles need internet. Offline, the map shows a plain background and markers. Peachtree can miss things and is not legal advice.
+
+## Tech stack, structure, tests, license
+
+Next.js 14, TypeScript, Tailwind, shadcn-style components, SQLite with better-sqlite3, Leaflet.
+
+```text
+src/ingest/    one fetcher per source
+src/agent/     triage, retrieval, chat, demo seed
+src/partners/  Grok Bot handoff
+src/actions/   item button registry
+src/lib/       database, LLM wrapper, helpers
+fixtures/      demo data
+docs/          demo script, playbook, design system
+```
+
+| Command | Checks |
+| --- | --- |
+| `npm test` | Unit tests |
+| `npm run smoke` | Production build, pages and API routes |
+| `npm run e2e` | Clicks the demo path, fails on console errors |
+
+License: none chosen yet.

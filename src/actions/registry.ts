@@ -28,6 +28,7 @@ export const ACTIONS: ItemAction[] = [
   { id: 'dismiss', label: "Didn't need this", appliesTo: surfaced, run: (v) => overturn(v.id, 'didnt_need') },
   { id: 'surface', label: 'Should have surfaced', appliesTo: (v) => !surfaced(v), run: (v) => overturn(v.id, 'should_have_surfaced') },
   { id: 'ask', label: 'Ask', appliesTo: () => true, href: (v) => `/ask?item=${encodeURIComponent(v.id)}` },
+  { id: 'handoff', label: 'Hand to Grok Bot', appliesTo: surfaced },
 ];
 
 export function buttonsFor(v: ItemView): ActionButton[] {

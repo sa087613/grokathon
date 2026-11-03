@@ -30,6 +30,7 @@ describe('llm wrapper', () => {
     vi.stubEnv('LLM_FIXTURE', '');
     vi.stubEnv('OPENAI_API_KEY', '');
     vi.stubEnv('ANTHROPIC_API_KEY', 'k');
+    vi.stubEnv('LLM_MODE', 'live');
     const f = stubFetch({ content: [{ type: 'tool_use', id: 't3', name: 'a', input: { q: 1 } }] });
     const r = await chat({ system: 's', messages: toolTurn, tools: [], fixture: () => ({ text: '', toolCalls: [] }) });
     expect(r.toolCalls[0]).toEqual({ id: 't3', name: 'a', args: { q: 1 } });
@@ -42,6 +43,7 @@ describe('llm wrapper', () => {
     vi.stubEnv('LLM_FIXTURE', '');
     vi.stubEnv('ANTHROPIC_API_KEY', '');
     vi.stubEnv('OPENAI_API_KEY', 'k');
+    vi.stubEnv('LLM_MODE', 'live');
     const f = stubFetch({ choices: [{ message: { content: 'done' } }] });
     const r = await chat({ system: 's', messages: toolTurn, tools: [], fixture: () => ({ text: '', toolCalls: [] }) });
     expect(r.text).toBe('done');

@@ -25,7 +25,10 @@ function RadarArt() {
   );
 }
 
+export const dynamic = 'force-dynamic';
+
 export default function About() {
+  const video = process.env.GROKBOT_DEMO_VIDEO_URL;
   return (
     <>
       <section className="py-12 text-center sm:py-20">
@@ -55,7 +58,7 @@ export default function About() {
             <div className="border border-dashed border-line-strong p-4">
               <h3 className="font-semibold text-muted">Demo video</h3>
               <p className="mt-1 text-sm text-muted">A morning on the radar, start to finish.</p>
-              <p className="label mt-3 text-muted">Not yet</p>
+              {video ? <a href={video} className="text-link-plain mt-3 inline-block text-sm">Watch the video</a> : <p className="label mt-3 text-muted">Not yet</p>}
             </div>
           </div>
         </section>

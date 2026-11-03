@@ -1,0 +1,5 @@
+---
+description: Peachtree project rules
+alwaysApply: true
+---
+Follow AGENTS.md at the repo root. Log finished tasks in docs/DEVLOG.md and keep task briefs in docs/TASKS.

@@ -29,8 +29,11 @@ const MODELS = {
   openai: { cheap: 'gpt-4o-mini', full: 'gpt-4o' },
 };
 
+/** LLM_MODE=live drives Ask the radar only. Triage stays on fixtures unless LLM_TRIAGE=1. */
+const triageProvider = (): Provider => (process.env.LLM_TRIAGE === '1' ? provider() : 'fixture');
+
 export function provider(): Provider {
-  if (process.env.LLM_FIXTURE === '1') return 'fixture';
+  if (process.env.LLM_FIXTURE === '1' || process.env.LLM_MODE !== 'live') return 'fixture';
   const asked = process.env.LLM_PROVIDER;
   if (asked === 'anthropic' && process.env.ANTHROPIC_API_KEY) return 'anthropic';
   if (asked === 'openai' && process.env.OPENAI_API_KEY) return 'openai';
@@ -147,7 +150,7 @@ export function parseJson(text: string): unknown {
 
 /** One JSON completion. `fixture` supplies the canned answer in FIXTURE mode. */
 export async function completeJson<T>(opts: { tier: Tier; system: string; user: string; fixture: () => T }): Promise<{ data: unknown; model: string }> {
-  const p = provider();
+  const p = triageProvider();
   if (p === 'fixture') return { data: opts.fixture(), model: 'fixture' };
   const res = await callProvider(p, opts.tier, opts.system, [{ role: 'user', content: opts.user }], undefined, true);
   return { data: parseJson(res.text), model: res.model };
@@ -162,7 +165,7 @@ export async function chat(opts: { system: string; messages: ChatMessage[]; tool
 
 /** Real embeddings need OpenAI; everything else uses the local hashed embedding. */
 export async function embed(text: string): Promise<{ vector: number[]; model: string }> {
-  if (provider() === 'openai' || (provider() === 'anthropic' && process.env.OPENAI_API_KEY)) {
+  if (triageProvider() !== 'fixture' && process.env.OPENAI_API_KEY) {
     const data = await post(
       'https://api.openai.com/v1/embeddings',
       { authorization: `Bearer ${process.env.OPENAI_API_KEY}` },

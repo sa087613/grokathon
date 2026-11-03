@@ -19,7 +19,10 @@ export function StreetMap({ jobs, base }: { jobs: StreetJob[]; base: { lat: numb
       map = L.map(el.current, { scrollWheelZoom: false }).setView([base.lat + 0.022, base.lng - 0.024], 12);
       // CARTO Dark Matter needs a key. Without one, OpenStreetMap tiles are darkened in CSS.
       const key = process.env.NEXT_PUBLIC_CARTO_API_KEY;
-      if (key) {
+      // Offline, skip tiles: the plain background and markers still render, with no failed requests.
+      if (!navigator.onLine) {
+        // No tile layer.
+      } else if (key) {
         L.tileLayer(`https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png?api_key=${key}`, { attribution: '&copy; OpenStreetMap contributors &copy; CARTO', subdomains: 'abcd', maxZoom: 19 }).addTo(map);
       } else {
         el.current.classList.add('osm-dark');

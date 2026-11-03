@@ -1,6 +1,8 @@
 node_modules
 .next
+.next-check
 data/
+tsconfig.tsbuildinfo
 .env
 .env.local
 *.tsbuildinfo

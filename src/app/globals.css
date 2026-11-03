@@ -5,6 +5,8 @@
 /* Dark only. Space-separated RGB channels so Tailwind opacity modifiers work. */
 :root {
   color-scheme: dark;
+  --font-sans: 'Schibsted Grotesk Variable';
+  --font-mono: 'IBM Plex Mono';
   --paper: 18 17 16;
   --panel: 26 25 23;
   --raise: 35 33 30;
