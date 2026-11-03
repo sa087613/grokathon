@@ -33,7 +33,7 @@ Copy `.env.example` to `.env`, then export it for the job (`tsx` does not load `
 
 A source that fails is named in the Overview header and is never replaced with fixture data, because silence must not read as all clear. Fixture PDFs are therefore the fallback for demo runs only.
 
-As of the last check, atlantaga.gov and dekalbpublichealth.com answer automated requests with 403, so those watched pages show as unavailable in live mode. They need an allowed fetch route or a manual check.
+Known live gaps as of November 2026: some atlantaga.gov and dekalbpublichealth.com pages answer automated requests with 403, and the council committee agenda pages expose no document links to a static scrape, so those sources show as unavailable. openFDA, the FDA RSS feed and the Fulton County environmental health page work.
 
 ## Architecture
 

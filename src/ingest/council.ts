@@ -6,7 +6,8 @@ import { USER_AGENT, fetchText, fixturePath, readFixture, resolveDates, sourceMo
 import { pdfText } from './pdf';
 
 const BASE = 'https://citycouncil.atlantaga.gov/';
-const AGENDA_PAGE = `${BASE}legislation/meeting-agenda`;
+const COMMITTEES = ['city-utilities', 'committee-on-council', 'community-development-human-services', 'finance-executive-committee', 'public-safety-committee', 'transportation-committee', 'zoning-committee'];
+const AGENDA_PAGES = COMMITTEES.map((c) => `${BASE}standing-committees/${c}/agenda`);
 const LEGISLATION_NUMBER = /\b\d{2}-[OR]-\d+/i;
 
 export interface AgendaEntry {
@@ -50,9 +51,13 @@ async function pdfBody(href: string): Promise<string> {
 }
 
 export async function fetchCouncil(): Promise<Item[]> {
-  const html = sourceMode() === 'fixture' ? readFixture('council/agenda.html') : await fetchText(AGENDA_PAGE);
+  const isFixture = sourceMode() === 'fixture';
+  const pages = isFixture ? [readFixture('council/agenda.html')] : await Promise.all(AGENDA_PAGES.map(fetchText));
+  const entries = pages.flatMap(parseAgendaHtml);
+  // An empty parse means the site changed, which must not look like a quiet day.
+  if (!entries.length) throw new Error('No agenda documents found');
   const items: Item[] = [];
-  for (const e of parseAgendaHtml(html)) {
+  for (const e of entries.slice(0, 40)) {
     const isPdf = /\.pdf($|\?)/i.test(e.href);
     const fixture = e.href.startsWith('fixture:') || e.href === '#';
     let body = '';
