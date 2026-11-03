@@ -4,7 +4,7 @@ import './globals.css';
 
 export const metadata: Metadata = { title: 'Peachtree', description: 'A compliance radar for Atlanta restaurants and food trucks.' };
 
-const NAV = [['/', 'Overview'], ['/rejected', 'Rejected'], ['/profile', 'Store'], ['/about', 'About']];
+const NAV = [['/', 'Overview'], ['/rejected', 'Rejected'], ['/ask', 'Ask'], ['/profile', 'Store'], ['/about', 'About']];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
